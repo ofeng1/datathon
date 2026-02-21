@@ -1,0 +1,24 @@
+mode: csv  # csv or fhir
+
+# Label windows
+ed_revisit_hours: 72
+readmit_days: 30
+
+# Modeling
+test_size: 0.2
+random_seed: 42
+
+# Paths (for csv mode)
+csv:
+  encounters_path: data/encounters.csv
+  observations_path: data/observations.csv      # optional
+  medications_path: data/medications.csv        # optional
+
+# FHIR mode pulls encounters etc from server
+fhir:
+  max_patients: 500
+  since_days: 180
+
+rag:
+  kb_dir: care_bounce/rag/knowledge_base
+  top_k: 4
