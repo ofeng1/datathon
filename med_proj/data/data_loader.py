@@ -8,7 +8,7 @@ class DataLoader:
     def load_data(self, zip_path: str):
 
         data_dir = Path(".").resolve()
-        zip_path = data_dir / "med_proj" / "data"/ zip_path
+        zip_path = data_dir / zip_path
 
         with zipfile.ZipFile(zip_path, "r") as zf:
             zf.extractall(path=data_dir)
@@ -20,4 +20,8 @@ class DataLoader:
 
 if __name__ == "__main__":
     data_loader = DataLoader()
-    df = data_loader.load_data("ed2015-sas.sas7bdat.zip")
+    zip_paths = ["ed2015-sas.sas7bdat.zip"]
+    df = pd.DataFrame()
+    for zip_path in zip_paths:
+        df_temp = data_loader.load_data(zip_path)
+        df = pd.concat([df, df_temp])
