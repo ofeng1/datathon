@@ -1,0 +1,5160 @@
+{
+  "columns": [
+    {
+      "name": "VMONTH",
+      "file": "VMONTH",
+      "dtype": "float64"
+    },
+    {
+      "name": "VDAYR",
+      "file": "VDAYR",
+      "dtype": "float64"
+    },
+    {
+      "name": "ARRTIME",
+      "file": "ARRTIME",
+      "dtype": "object"
+    },
+    {
+      "name": "WAITTIME",
+      "file": "WAITTIME",
+      "dtype": "float64"
+    },
+    {
+      "name": "LOV",
+      "file": "LOV",
+      "dtype": "float64"
+    },
+    {
+      "name": "AGE",
+      "file": "AGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "AGER",
+      "file": "AGER",
+      "dtype": "float64"
+    },
+    {
+      "name": "AGEDAYS",
+      "file": "AGEDAYS",
+      "dtype": "float64"
+    },
+    {
+      "name": "RESIDNCE",
+      "file": "RESIDNCE",
+      "dtype": "float64"
+    },
+    {
+      "name": "SEX",
+      "file": "SEX",
+      "dtype": "float64"
+    },
+    {
+      "name": "ETHUN",
+      "file": "ETHUN",
+      "dtype": "float64"
+    },
+    {
+      "name": "ETHIM",
+      "file": "ETHIM",
+      "dtype": "float64"
+    },
+    {
+      "name": "RACEUN",
+      "file": "RACEUN",
+      "dtype": "float64"
+    },
+    {
+      "name": "RACER",
+      "file": "RACER",
+      "dtype": "float64"
+    },
+    {
+      "name": "RACERETH",
+      "file": "RACERETH",
+      "dtype": "float64"
+    },
+    {
+      "name": "ARREMS",
+      "file": "ARREMS",
+      "dtype": "float64"
+    },
+    {
+      "name": "AMBTRANSFER",
+      "file": "AMBTRANSFER",
+      "dtype": "float64"
+    },
+    {
+      "name": "NOPAY",
+      "file": "NOPAY",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYPRIV",
+      "file": "PAYPRIV",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYMCARE",
+      "file": "PAYMCARE",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYMCAID",
+      "file": "PAYMCAID",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYWKCMP",
+      "file": "PAYWKCMP",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYSELF",
+      "file": "PAYSELF",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYNOCHG",
+      "file": "PAYNOCHG",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYOTH",
+      "file": "PAYOTH",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYDK",
+      "file": "PAYDK",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAYTYPER",
+      "file": "PAYTYPER",
+      "dtype": "float64"
+    },
+    {
+      "name": "TEMPF",
+      "file": "TEMPF",
+      "dtype": "float64"
+    },
+    {
+      "name": "PULSE",
+      "file": "PULSE",
+      "dtype": "float64"
+    },
+    {
+      "name": "RESPR",
+      "file": "RESPR",
+      "dtype": "float64"
+    },
+    {
+      "name": "BPSYS",
+      "file": "BPSYS",
+      "dtype": "float64"
+    },
+    {
+      "name": "BPDIAS",
+      "file": "BPDIAS",
+      "dtype": "float64"
+    },
+    {
+      "name": "POPCT",
+      "file": "POPCT",
+      "dtype": "float64"
+    },
+    {
+      "name": "IMMEDR",
+      "file": "IMMEDR",
+      "dtype": "float64"
+    },
+    {
+      "name": "PAINSCALE",
+      "file": "PAINSCALE",
+      "dtype": "float64"
+    },
+    {
+      "name": "SEEN72",
+      "file": "SEEN72",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV1",
+      "file": "RFV1",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV2",
+      "file": "RFV2",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV3",
+      "file": "RFV3",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV4",
+      "file": "RFV4",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV5",
+      "file": "RFV5",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV13D",
+      "file": "RFV13D",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV23D",
+      "file": "RFV23D",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV33D",
+      "file": "RFV33D",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV43D",
+      "file": "RFV43D",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFV53D",
+      "file": "RFV53D",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPISODE",
+      "file": "EPISODE",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJURY",
+      "file": "INJURY",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJR1",
+      "file": "INJR1",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJR2",
+      "file": "INJR2",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJPOISAD",
+      "file": "INJPOISAD",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJPOISADR1",
+      "file": "INJPOISADR1",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJPOISADR2",
+      "file": "INJPOISADR2",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJURY72",
+      "file": "INJURY72",
+      "dtype": "float64"
+    },
+    {
+      "name": "INTENT15",
+      "file": "INTENT15",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJDETR",
+      "file": "INJDETR",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJDETR1",
+      "file": "INJDETR1",
+      "dtype": "float64"
+    },
+    {
+      "name": "INJDETR2",
+      "file": "INJDETR2",
+      "dtype": "float64"
+    },
+    {
+      "name": "CAUSE1",
+      "file": "CAUSE1",
+      "dtype": "object"
+    },
+    {
+      "name": "CAUSE2",
+      "file": "CAUSE2",
+      "dtype": "object"
+    },
+    {
+      "name": "CAUSE3",
+      "file": "CAUSE3",
+      "dtype": "object"
+    },
+    {
+      "name": "CAUSE13D",
+      "file": "CAUSE13D",
+      "dtype": "object"
+    },
+    {
+      "name": "CAUSE23D",
+      "file": "CAUSE23D",
+      "dtype": "object"
+    },
+    {
+      "name": "CAUSE33D",
+      "file": "CAUSE33D",
+      "dtype": "object"
+    },
+    {
+      "name": "CAUSE1R",
+      "file": "CAUSE1R",
+      "dtype": "float64"
+    },
+    {
+      "name": "CAUSE2R",
+      "file": "CAUSE2R",
+      "dtype": "float64"
+    },
+    {
+      "name": "CAUSE3R",
+      "file": "CAUSE3R",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAG1",
+      "file": "DIAG1",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG2",
+      "file": "DIAG2",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG3",
+      "file": "DIAG3",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG4",
+      "file": "DIAG4",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG5",
+      "file": "DIAG5",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG13D",
+      "file": "DIAG13D",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG23D",
+      "file": "DIAG23D",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG33D",
+      "file": "DIAG33D",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG43D",
+      "file": "DIAG43D",
+      "dtype": "object"
+    },
+    {
+      "name": "DIAG53D",
+      "file": "DIAG53D",
+      "dtype": "object"
+    },
+    {
+      "name": "PRDIAG1",
+      "file": "PRDIAG1",
+      "dtype": "float64"
+    },
+    {
+      "name": "PRDIAG2",
+      "file": "PRDIAG2",
+      "dtype": "float64"
+    },
+    {
+      "name": "PRDIAG3",
+      "file": "PRDIAG3",
+      "dtype": "float64"
+    },
+    {
+      "name": "PRDIAG4",
+      "file": "PRDIAG4",
+      "dtype": "float64"
+    },
+    {
+      "name": "PRDIAG5",
+      "file": "PRDIAG5",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAG1R",
+      "file": "DIAG1R",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAG2R",
+      "file": "DIAG2R",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAG3R",
+      "file": "DIAG3R",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAG4R",
+      "file": "DIAG4R",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAG5R",
+      "file": "DIAG5R",
+      "dtype": "float64"
+    },
+    {
+      "name": "ETOHAB",
+      "file": "ETOHAB",
+      "dtype": "float64"
+    },
+    {
+      "name": "ALZHD",
+      "file": "ALZHD",
+      "dtype": "float64"
+    },
+    {
+      "name": "ASTHMA",
+      "file": "ASTHMA",
+      "dtype": "float64"
+    },
+    {
+      "name": "CANCER",
+      "file": "CANCER",
+      "dtype": "float64"
+    },
+    {
+      "name": "CEBVD",
+      "file": "CEBVD",
+      "dtype": "float64"
+    },
+    {
+      "name": "CKD",
+      "file": "CKD",
+      "dtype": "float64"
+    },
+    {
+      "name": "COPD",
+      "file": "COPD",
+      "dtype": "float64"
+    },
+    {
+      "name": "CHF",
+      "file": "CHF",
+      "dtype": "float64"
+    },
+    {
+      "name": "CAD",
+      "file": "CAD",
+      "dtype": "float64"
+    },
+    {
+      "name": "DEPRN",
+      "file": "DEPRN",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIABTYP1",
+      "file": "DIABTYP1",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIABTYP2",
+      "file": "DIABTYP2",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIABTYP0",
+      "file": "DIABTYP0",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESRD",
+      "file": "ESRD",
+      "dtype": "float64"
+    },
+    {
+      "name": "HPE",
+      "file": "HPE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDHIV",
+      "file": "EDHIV",
+      "dtype": "float64"
+    },
+    {
+      "name": "HYPLIPID",
+      "file": "HYPLIPID",
+      "dtype": "float64"
+    },
+    {
+      "name": "HTN",
+      "file": "HTN",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBESITY",
+      "file": "OBESITY",
+      "dtype": "float64"
+    },
+    {
+      "name": "OSA",
+      "file": "OSA",
+      "dtype": "float64"
+    },
+    {
+      "name": "OSTPRSIS",
+      "file": "OSTPRSIS",
+      "dtype": "float64"
+    },
+    {
+      "name": "SUBSTAB",
+      "file": "SUBSTAB",
+      "dtype": "float64"
+    },
+    {
+      "name": "NOCHRON",
+      "file": "NOCHRON",
+      "dtype": "float64"
+    },
+    {
+      "name": "TOTCHRON",
+      "file": "TOTCHRON",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIAGSCRN",
+      "file": "DIAGSCRN",
+      "dtype": "float64"
+    },
+    {
+      "name": "ABG",
+      "file": "ABG",
+      "dtype": "float64"
+    },
+    {
+      "name": "BAC",
+      "file": "BAC",
+      "dtype": "float64"
+    },
+    {
+      "name": "BMP",
+      "file": "BMP",
+      "dtype": "float64"
+    },
+    {
+      "name": "BLOODCX",
+      "file": "BLOODCX",
+      "dtype": "float64"
+    },
+    {
+      "name": "BNP",
+      "file": "BNP",
+      "dtype": "float64"
+    },
+    {
+      "name": "BUNCREAT",
+      "file": "BUNCREAT",
+      "dtype": "float64"
+    },
+    {
+      "name": "CARDENZ",
+      "file": "CARDENZ",
+      "dtype": "float64"
+    },
+    {
+      "name": "CBC",
+      "file": "CBC",
+      "dtype": "float64"
+    },
+    {
+      "name": "CMP",
+      "file": "CMP",
+      "dtype": "float64"
+    },
+    {
+      "name": "DDIMER",
+      "file": "DDIMER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ELECTROL",
+      "file": "ELECTROL",
+      "dtype": "float64"
+    },
+    {
+      "name": "GLUCOSE",
+      "file": "GLUCOSE",
+      "dtype": "float64"
+    },
+    {
+      "name": "LACTATE",
+      "file": "LACTATE",
+      "dtype": "float64"
+    },
+    {
+      "name": "LFT",
+      "file": "LFT",
+      "dtype": "float64"
+    },
+    {
+      "name": "PTTINR",
+      "file": "PTTINR",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHERBLD",
+      "file": "OTHERBLD",
+      "dtype": "float64"
+    },
+    {
+      "name": "CARDMON",
+      "file": "CARDMON",
+      "dtype": "float64"
+    },
+    {
+      "name": "EKG",
+      "file": "EKG",
+      "dtype": "float64"
+    },
+    {
+      "name": "HIVTEST",
+      "file": "HIVTEST",
+      "dtype": "float64"
+    },
+    {
+      "name": "FLUTEST",
+      "file": "FLUTEST",
+      "dtype": "float64"
+    },
+    {
+      "name": "PREGTEST",
+      "file": "PREGTEST",
+      "dtype": "float64"
+    },
+    {
+      "name": "TRTCX",
+      "file": "TRTCX",
+      "dtype": "float64"
+    },
+    {
+      "name": "TOXSCREN",
+      "file": "TOXSCREN",
+      "dtype": "float64"
+    },
+    {
+      "name": "URINE",
+      "file": "URINE",
+      "dtype": "float64"
+    },
+    {
+      "name": "URINECX",
+      "file": "URINECX",
+      "dtype": "float64"
+    },
+    {
+      "name": "WOUNDCX",
+      "file": "WOUNDCX",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHCX",
+      "file": "OTHCX",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHRTEST",
+      "file": "OTHRTEST",
+      "dtype": "float64"
+    },
+    {
+      "name": "ANYIMAGE",
+      "file": "ANYIMAGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "XRAY",
+      "file": "XRAY",
+      "dtype": "float64"
+    },
+    {
+      "name": "CATSCAN",
+      "file": "CATSCAN",
+      "dtype": "float64"
+    },
+    {
+      "name": "CTCONTRAST",
+      "file": "CTCONTRAST",
+      "dtype": "float64"
+    },
+    {
+      "name": "CTAB",
+      "file": "CTAB",
+      "dtype": "float64"
+    },
+    {
+      "name": "CTCHEST",
+      "file": "CTCHEST",
+      "dtype": "float64"
+    },
+    {
+      "name": "CTHEAD",
+      "file": "CTHEAD",
+      "dtype": "float64"
+    },
+    {
+      "name": "CTOTHER",
+      "file": "CTOTHER",
+      "dtype": "float64"
+    },
+    {
+      "name": "CTUNK",
+      "file": "CTUNK",
+      "dtype": "float64"
+    },
+    {
+      "name": "MRI",
+      "file": "MRI",
+      "dtype": "float64"
+    },
+    {
+      "name": "MRICONTRAST",
+      "file": "MRICONTRAST",
+      "dtype": "float64"
+    },
+    {
+      "name": "ULTRASND",
+      "file": "ULTRASND",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHIMAGE",
+      "file": "OTHIMAGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "TOTDIAG",
+      "file": "TOTDIAG",
+      "dtype": "float64"
+    },
+    {
+      "name": "PROC",
+      "file": "PROC",
+      "dtype": "float64"
+    },
+    {
+      "name": "BPAP",
+      "file": "BPAP",
+      "dtype": "float64"
+    },
+    {
+      "name": "BLADCATH",
+      "file": "BLADCATH",
+      "dtype": "float64"
+    },
+    {
+      "name": "CASTSPLINT",
+      "file": "CASTSPLINT",
+      "dtype": "float64"
+    },
+    {
+      "name": "CENTLINE",
+      "file": "CENTLINE",
+      "dtype": "float64"
+    },
+    {
+      "name": "CPR",
+      "file": "CPR",
+      "dtype": "float64"
+    },
+    {
+      "name": "ENDOINT",
+      "file": "ENDOINT",
+      "dtype": "float64"
+    },
+    {
+      "name": "INCDRAIN",
+      "file": "INCDRAIN",
+      "dtype": "float64"
+    },
+    {
+      "name": "IVFLUIDS",
+      "file": "IVFLUIDS",
+      "dtype": "float64"
+    },
+    {
+      "name": "LUMBAR",
+      "file": "LUMBAR",
+      "dtype": "float64"
+    },
+    {
+      "name": "NEBUTHER",
+      "file": "NEBUTHER",
+      "dtype": "float64"
+    },
+    {
+      "name": "PELVIC",
+      "file": "PELVIC",
+      "dtype": "float64"
+    },
+    {
+      "name": "SKINADH",
+      "file": "SKINADH",
+      "dtype": "float64"
+    },
+    {
+      "name": "SUTURE",
+      "file": "SUTURE",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHPROC",
+      "file": "OTHPROC",
+      "dtype": "float64"
+    },
+    {
+      "name": "TOTPROC",
+      "file": "TOTPROC",
+      "dtype": "float64"
+    },
+    {
+      "name": "MED",
+      "file": "MED",
+      "dtype": "float64"
+    },
+    {
+      "name": "MED1",
+      "file": "MED1",
+      "dtype": "object"
+    },
+    {
+      "name": "MED2",
+      "file": "MED2",
+      "dtype": "object"
+    },
+    {
+      "name": "MED3",
+      "file": "MED3",
+      "dtype": "object"
+    },
+    {
+      "name": "MED4",
+      "file": "MED4",
+      "dtype": "object"
+    },
+    {
+      "name": "MED5",
+      "file": "MED5",
+      "dtype": "object"
+    },
+    {
+      "name": "MED6",
+      "file": "MED6",
+      "dtype": "object"
+    },
+    {
+      "name": "MED7",
+      "file": "MED7",
+      "dtype": "object"
+    },
+    {
+      "name": "MED8",
+      "file": "MED8",
+      "dtype": "object"
+    },
+    {
+      "name": "MED9",
+      "file": "MED9",
+      "dtype": "object"
+    },
+    {
+      "name": "MED10",
+      "file": "MED10",
+      "dtype": "object"
+    },
+    {
+      "name": "MED11",
+      "file": "MED11",
+      "dtype": "object"
+    },
+    {
+      "name": "MED12",
+      "file": "MED12",
+      "dtype": "object"
+    },
+    {
+      "name": "MED13",
+      "file": "MED13",
+      "dtype": "object"
+    },
+    {
+      "name": "MED14",
+      "file": "MED14",
+      "dtype": "object"
+    },
+    {
+      "name": "MED15",
+      "file": "MED15",
+      "dtype": "object"
+    },
+    {
+      "name": "MED16",
+      "file": "MED16",
+      "dtype": "object"
+    },
+    {
+      "name": "MED17",
+      "file": "MED17",
+      "dtype": "object"
+    },
+    {
+      "name": "MED18",
+      "file": "MED18",
+      "dtype": "object"
+    },
+    {
+      "name": "MED19",
+      "file": "MED19",
+      "dtype": "object"
+    },
+    {
+      "name": "MED20",
+      "file": "MED20",
+      "dtype": "object"
+    },
+    {
+      "name": "MED21",
+      "file": "MED21",
+      "dtype": "object"
+    },
+    {
+      "name": "MED22",
+      "file": "MED22",
+      "dtype": "object"
+    },
+    {
+      "name": "MED23",
+      "file": "MED23",
+      "dtype": "object"
+    },
+    {
+      "name": "MED24",
+      "file": "MED24",
+      "dtype": "object"
+    },
+    {
+      "name": "MED25",
+      "file": "MED25",
+      "dtype": "object"
+    },
+    {
+      "name": "MED26",
+      "file": "MED26",
+      "dtype": "object"
+    },
+    {
+      "name": "MED27",
+      "file": "MED27",
+      "dtype": "object"
+    },
+    {
+      "name": "MED28",
+      "file": "MED28",
+      "dtype": "object"
+    },
+    {
+      "name": "MED29",
+      "file": "MED29",
+      "dtype": "object"
+    },
+    {
+      "name": "MED30",
+      "file": "MED30",
+      "dtype": "object"
+    },
+    {
+      "name": "GPMED1",
+      "file": "GPMED1",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED2",
+      "file": "GPMED2",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED3",
+      "file": "GPMED3",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED4",
+      "file": "GPMED4",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED5",
+      "file": "GPMED5",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED6",
+      "file": "GPMED6",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED7",
+      "file": "GPMED7",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED8",
+      "file": "GPMED8",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED9",
+      "file": "GPMED9",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED10",
+      "file": "GPMED10",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED11",
+      "file": "GPMED11",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED12",
+      "file": "GPMED12",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED13",
+      "file": "GPMED13",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED14",
+      "file": "GPMED14",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED15",
+      "file": "GPMED15",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED16",
+      "file": "GPMED16",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED17",
+      "file": "GPMED17",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED18",
+      "file": "GPMED18",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED19",
+      "file": "GPMED19",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED20",
+      "file": "GPMED20",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED21",
+      "file": "GPMED21",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED22",
+      "file": "GPMED22",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED23",
+      "file": "GPMED23",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED24",
+      "file": "GPMED24",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED25",
+      "file": "GPMED25",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED26",
+      "file": "GPMED26",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED27",
+      "file": "GPMED27",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED28",
+      "file": "GPMED28",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED29",
+      "file": "GPMED29",
+      "dtype": "float64"
+    },
+    {
+      "name": "GPMED30",
+      "file": "GPMED30",
+      "dtype": "float64"
+    },
+    {
+      "name": "NUMGIV",
+      "file": "NUMGIV",
+      "dtype": "float64"
+    },
+    {
+      "name": "NUMDIS",
+      "file": "NUMDIS",
+      "dtype": "float64"
+    },
+    {
+      "name": "NUMMED",
+      "file": "NUMMED",
+      "dtype": "float64"
+    },
+    {
+      "name": "VITALSD",
+      "file": "VITALSD",
+      "dtype": "float64"
+    },
+    {
+      "name": "TEMPDF",
+      "file": "TEMPDF",
+      "dtype": "float64"
+    },
+    {
+      "name": "PULSED",
+      "file": "PULSED",
+      "dtype": "float64"
+    },
+    {
+      "name": "RESPRD",
+      "file": "RESPRD",
+      "dtype": "float64"
+    },
+    {
+      "name": "BPSYSD",
+      "file": "BPSYSD",
+      "dtype": "float64"
+    },
+    {
+      "name": "BPDIASD",
+      "file": "BPDIASD",
+      "dtype": "float64"
+    },
+    {
+      "name": "NOPROVID",
+      "file": "NOPROVID",
+      "dtype": "float64"
+    },
+    {
+      "name": "ATTPHYS",
+      "file": "ATTPHYS",
+      "dtype": "float64"
+    },
+    {
+      "name": "RESINT",
+      "file": "RESINT",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONSULT",
+      "file": "CONSULT",
+      "dtype": "float64"
+    },
+    {
+      "name": "RNLPN",
+      "file": "RNLPN",
+      "dtype": "float64"
+    },
+    {
+      "name": "NURSEPR",
+      "file": "NURSEPR",
+      "dtype": "float64"
+    },
+    {
+      "name": "PHYSASST",
+      "file": "PHYSASST",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMT",
+      "file": "EMT",
+      "dtype": "float64"
+    },
+    {
+      "name": "MHPROV",
+      "file": "MHPROV",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHPROV",
+      "file": "OTHPROV",
+      "dtype": "float64"
+    },
+    {
+      "name": "NODISP",
+      "file": "NODISP",
+      "dtype": "float64"
+    },
+    {
+      "name": "NOFU",
+      "file": "NOFU",
+      "dtype": "float64"
+    },
+    {
+      "name": "RETRNED",
+      "file": "RETRNED",
+      "dtype": "float64"
+    },
+    {
+      "name": "RETREFFU",
+      "file": "RETREFFU",
+      "dtype": "float64"
+    },
+    {
+      "name": "LEFTBTRI",
+      "file": "LEFTBTRI",
+      "dtype": "float64"
+    },
+    {
+      "name": "LEFTATRI",
+      "file": "LEFTATRI",
+      "dtype": "float64"
+    },
+    {
+      "name": "LEFTAMA",
+      "file": "LEFTAMA",
+      "dtype": "float64"
+    },
+    {
+      "name": "DOA",
+      "file": "DOA",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIEDED",
+      "file": "DIEDED",
+      "dtype": "float64"
+    },
+    {
+      "name": "TRANNH",
+      "file": "TRANNH",
+      "dtype": "float64"
+    },
+    {
+      "name": "TRANPSYC",
+      "file": "TRANPSYC",
+      "dtype": "float64"
+    },
+    {
+      "name": "TRANOTH",
+      "file": "TRANOTH",
+      "dtype": "float64"
+    },
+    {
+      "name": "ADMITHOS",
+      "file": "ADMITHOS",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSHOS",
+      "file": "OBSHOS",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSDIS",
+      "file": "OBSDIS",
+      "dtype": "float64"
+    },
+    {
+      "name": "OTHDISP",
+      "file": "OTHDISP",
+      "dtype": "float64"
+    },
+    {
+      "name": "ADMIT",
+      "file": "ADMIT",
+      "dtype": "float64"
+    },
+    {
+      "name": "ADMTPHYS",
+      "file": "ADMTPHYS",
+      "dtype": "float64"
+    },
+    {
+      "name": "BOARDED",
+      "file": "BOARDED",
+      "dtype": "float64"
+    },
+    {
+      "name": "LOS",
+      "file": "LOS",
+      "dtype": "float64"
+    },
+    {
+      "name": "HDDIAG1",
+      "file": "HDDIAG1",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG2",
+      "file": "HDDIAG2",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG3",
+      "file": "HDDIAG3",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG4",
+      "file": "HDDIAG4",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG5",
+      "file": "HDDIAG5",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG13D",
+      "file": "HDDIAG13D",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG23D",
+      "file": "HDDIAG23D",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG33D",
+      "file": "HDDIAG33D",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG43D",
+      "file": "HDDIAG43D",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG53D",
+      "file": "HDDIAG53D",
+      "dtype": "object"
+    },
+    {
+      "name": "HDDIAG1R",
+      "file": "HDDIAG1R",
+      "dtype": "float64"
+    },
+    {
+      "name": "HDDIAG2R",
+      "file": "HDDIAG2R",
+      "dtype": "float64"
+    },
+    {
+      "name": "HDDIAG3R",
+      "file": "HDDIAG3R",
+      "dtype": "float64"
+    },
+    {
+      "name": "HDDIAG4R",
+      "file": "HDDIAG4R",
+      "dtype": "float64"
+    },
+    {
+      "name": "HDDIAG5R",
+      "file": "HDDIAG5R",
+      "dtype": "float64"
+    },
+    {
+      "name": "HDSTAT",
+      "file": "HDSTAT",
+      "dtype": "float64"
+    },
+    {
+      "name": "ADISP",
+      "file": "ADISP",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSSTAY",
+      "file": "OBSSTAY",
+      "dtype": "float64"
+    },
+    {
+      "name": "STAY24",
+      "file": "STAY24",
+      "dtype": "float64"
+    },
+    {
+      "name": "AGEFL",
+      "file": "AGEFL",
+      "dtype": "float64"
+    },
+    {
+      "name": "BDATEFL",
+      "file": "BDATEFL",
+      "dtype": "float64"
+    },
+    {
+      "name": "SEXFL",
+      "file": "SEXFL",
+      "dtype": "float64"
+    },
+    {
+      "name": "ETHNICFL",
+      "file": "ETHNICFL",
+      "dtype": "float64"
+    },
+    {
+      "name": "RACERFL",
+      "file": "RACERFL",
+      "dtype": "float64"
+    },
+    {
+      "name": "HOSPCODE",
+      "file": "HOSPCODE",
+      "dtype": "float64"
+    },
+    {
+      "name": "PATCODE",
+      "file": "PATCODE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EBILLANYE",
+      "file": "EBILLANYE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMRED",
+      "file": "EMRED",
+      "dtype": "float64"
+    },
+    {
+      "name": "HHSMUE",
+      "file": "HHSMUE",
+      "dtype": "float64"
+    },
+    {
+      "name": "SECURCHCKE",
+      "file": "SECURCHCKE",
+      "dtype": "float64"
+    },
+    {
+      "name": "DIFFEHRE",
+      "file": "DIFFEHRE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EHRINSE",
+      "file": "EHRINSE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDEMOGE",
+      "file": "EDEMOGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDEMOGER",
+      "file": "EDEMOGER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPROLSTE",
+      "file": "EPROLSTE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPROLSTER",
+      "file": "EPROLSTER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EVITALE",
+      "file": "EVITALE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EVITALER",
+      "file": "EVITALER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESMOKEE",
+      "file": "ESMOKEE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESMOKEER",
+      "file": "ESMOKEER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPNOTESE",
+      "file": "EPNOTESE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPNOTESER",
+      "file": "EPNOTESER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMEDALGE",
+      "file": "EMEDALGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMEDALGER",
+      "file": "EMEDALGER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMEDIDE",
+      "file": "EMEDIDE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMEDIDER",
+      "file": "EMEDIDER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EREMINDE",
+      "file": "EREMINDE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EREMINDER",
+      "file": "EREMINDER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ECPOEE",
+      "file": "ECPOEE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ECPOEER",
+      "file": "ECPOEER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESCRIPE",
+      "file": "ESCRIPE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESCRIPER",
+      "file": "ESCRIPER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EWARNE",
+      "file": "EWARNE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EWARNER",
+      "file": "EWARNER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EFORMULAE",
+      "file": "EFORMULAE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EFORMULAER",
+      "file": "EFORMULAER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ECTOEE",
+      "file": "ECTOEE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ECTOEER",
+      "file": "ECTOEER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EORDERE",
+      "file": "EORDERE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EORDERER",
+      "file": "EORDERER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ERESULTE",
+      "file": "ERESULTE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ERESULTER",
+      "file": "ERESULTER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EGRAPHE",
+      "file": "EGRAPHE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EGRAPHER",
+      "file": "EGRAPHER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ERADIE",
+      "file": "ERADIE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ERADIER",
+      "file": "ERADIER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EIMGRESE",
+      "file": "EIMGRESE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EIMGRESER",
+      "file": "EIMGRESER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPTEDUE",
+      "file": "EPTEDUE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPTEDUER",
+      "file": "EPTEDUER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ECQME",
+      "file": "ECQME",
+      "dtype": "float64"
+    },
+    {
+      "name": "ECQMER",
+      "file": "ECQMER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EIDPTE",
+      "file": "EIDPTE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EIDPTER",
+      "file": "EIDPTER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EGENLISTE",
+      "file": "EGENLISTE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EGENLISTER",
+      "file": "EGENLISTER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EIMMREGE",
+      "file": "EIMMREGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EIMMREGER",
+      "file": "EIMMREGER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESUME",
+      "file": "ESUME",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESUMER",
+      "file": "ESUMER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMSGE",
+      "file": "EMSGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMSGER",
+      "file": "EMSGER",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPTRECE",
+      "file": "EPTRECE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EPTRECER",
+      "file": "EPTRECER",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREE",
+      "file": "ESHAREE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREEHRE",
+      "file": "ESHAREEHRE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREWEBE",
+      "file": "ESHAREWEBE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREOTHE",
+      "file": "ESHAREOTHE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREUNKE",
+      "file": "ESHAREUNKE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREREFE",
+      "file": "ESHAREREFE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EHRTOEHRE",
+      "file": "EHRTOEHRE",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE1",
+      "file": "ESHAREPROVE1",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE2",
+      "file": "ESHAREPROVE2",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE3",
+      "file": "ESHAREPROVE3",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE4",
+      "file": "ESHAREPROVE4",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE5",
+      "file": "ESHAREPROVE5",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE6",
+      "file": "ESHAREPROVE6",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVE7",
+      "file": "ESHAREPROVE7",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVEREF",
+      "file": "ESHAREPROVEREF",
+      "dtype": "float64"
+    },
+    {
+      "name": "ESHAREPROVEUNK",
+      "file": "ESHAREPROVEUNK",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTINFOE",
+      "file": "EOUTINFOE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTHOWE1",
+      "file": "EOUTHOWE1",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTHOWE2",
+      "file": "EOUTHOWE2",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTHOWE3",
+      "file": "EOUTHOWE3",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTHOWE4",
+      "file": "EOUTHOWE4",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTHOWUNK",
+      "file": "EOUTHOWUNK",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTHOWREF",
+      "file": "EOUTHOWREF",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPE1",
+      "file": "EOUTYPE1",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPE2",
+      "file": "EOUTYPE2",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPE3",
+      "file": "EOUTYPE3",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPE4",
+      "file": "EOUTYPE4",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPE5",
+      "file": "EOUTYPE5",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPUNK",
+      "file": "EOUTYPUNK",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTYPREF",
+      "file": "EOUTYPREF",
+      "dtype": "float64"
+    },
+    {
+      "name": "EOUTINCORPE",
+      "file": "EOUTINCORPE",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDPRIM",
+      "file": "EDPRIM",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDINFO",
+      "file": "EDINFO",
+      "dtype": "float64"
+    },
+    {
+      "name": "MUSTAGE1",
+      "file": "MUSTAGE1",
+      "dtype": "float64"
+    },
+    {
+      "name": "MUSTAGE2",
+      "file": "MUSTAGE2",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSCLIN",
+      "file": "OBSCLIN",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSSEP",
+      "file": "OBSSEP",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSPHYSED",
+      "file": "OBSPHYSED",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSHOSP",
+      "file": "OBSHOSP",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSPHYSOT",
+      "file": "OBSPHYSOT",
+      "dtype": "float64"
+    },
+    {
+      "name": "OBSPHYSUN",
+      "file": "OBSPHYSUN",
+      "dtype": "float64"
+    },
+    {
+      "name": "BOARD",
+      "file": "BOARD",
+      "dtype": "float64"
+    },
+    {
+      "name": "BOARDHOS",
+      "file": "BOARDHOS",
+      "dtype": "float64"
+    },
+    {
+      "name": "AMBDIV",
+      "file": "AMBDIV",
+      "dtype": "float64"
+    },
+    {
+      "name": "TOTHRDIVR",
+      "file": "TOTHRDIVR",
+      "dtype": "float64"
+    },
+    {
+      "name": "REGDIV",
+      "file": "REGDIV",
+      "dtype": "float64"
+    },
+    {
+      "name": "ADMDIV",
+      "file": "ADMDIV",
+      "dtype": "float64"
+    },
+    {
+      "name": "INCSHX",
+      "file": "INCSHX",
+      "dtype": "float64"
+    },
+    {
+      "name": "INCPHYS",
+      "file": "INCPHYS",
+      "dtype": "float64"
+    },
+    {
+      "name": "EXPSPACE",
+      "file": "EXPSPACE",
+      "dtype": "float64"
+    },
+    {
+      "name": "BEDREG",
+      "file": "BEDREG",
+      "dtype": "float64"
+    },
+    {
+      "name": "KIOSELCHK",
+      "file": "KIOSELCHK",
+      "dtype": "float64"
+    },
+    {
+      "name": "CATRIAGE",
+      "file": "CATRIAGE",
+      "dtype": "float64"
+    },
+    {
+      "name": "IMBED",
+      "file": "IMBED",
+      "dtype": "float64"
+    },
+    {
+      "name": "ADVTRIAG",
+      "file": "ADVTRIAG",
+      "dtype": "float64"
+    },
+    {
+      "name": "PHYSPRACTRIA",
+      "file": "PHYSPRACTRIA",
+      "dtype": "float64"
+    },
+    {
+      "name": "FASTTRAK",
+      "file": "FASTTRAK",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDPTOR",
+      "file": "EDPTOR",
+      "dtype": "float64"
+    },
+    {
+      "name": "DASHBORD",
+      "file": "DASHBORD",
+      "dtype": "float64"
+    },
+    {
+      "name": "RFID",
+      "file": "RFID",
+      "dtype": "float64"
+    },
+    {
+      "name": "WIRELESS",
+      "file": "WIRELESS",
+      "dtype": "float64"
+    },
+    {
+      "name": "ZONENURS",
+      "file": "ZONENURS",
+      "dtype": "float64"
+    },
+    {
+      "name": "POOLNURS",
+      "file": "POOLNURS",
+      "dtype": "float64"
+    },
+    {
+      "name": "SURGDAY",
+      "file": "SURGDAY",
+      "dtype": "float64"
+    },
+    {
+      "name": "BEDCZAR",
+      "file": "BEDCZAR",
+      "dtype": "float64"
+    },
+    {
+      "name": "BEDDATA",
+      "file": "BEDDATA",
+      "dtype": "float64"
+    },
+    {
+      "name": "HLIST",
+      "file": "HLIST",
+      "dtype": "float64"
+    },
+    {
+      "name": "HLISTED",
+      "file": "HLISTED",
+      "dtype": "float64"
+    },
+    {
+      "name": "EMEDRES",
+      "file": "EMEDRES",
+      "dtype": "float64"
+    },
+    {
+      "name": "REGION",
+      "file": "REGION",
+      "dtype": "float64"
+    },
+    {
+      "name": "MSA",
+      "file": "MSA",
+      "dtype": "float64"
+    },
+    {
+      "name": "DRUGID1",
+      "file": "DRUGID1",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR1",
+      "file": "PRESCR1",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB1",
+      "file": "CONTSUB1",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT1",
+      "file": "COMSTAT1",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX1CAT1",
+      "file": "RX1CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1CAT2",
+      "file": "RX1CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1CAT3",
+      "file": "RX1CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1CAT4",
+      "file": "RX1CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V1C1",
+      "file": "RX1V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V1C2",
+      "file": "RX1V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V1C3",
+      "file": "RX1V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V1C4",
+      "file": "RX1V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V2C1",
+      "file": "RX1V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V2C2",
+      "file": "RX1V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V2C3",
+      "file": "RX1V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V2C4",
+      "file": "RX1V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V3C1",
+      "file": "RX1V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V3C2",
+      "file": "RX1V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V3C3",
+      "file": "RX1V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX1V3C4",
+      "file": "RX1V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID2",
+      "file": "DRUGID2",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR2",
+      "file": "PRESCR2",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB2",
+      "file": "CONTSUB2",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT2",
+      "file": "COMSTAT2",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX2CAT1",
+      "file": "RX2CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2CAT2",
+      "file": "RX2CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2CAT3",
+      "file": "RX2CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2CAT4",
+      "file": "RX2CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V1C1",
+      "file": "RX2V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V1C2",
+      "file": "RX2V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V1C3",
+      "file": "RX2V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V1C4",
+      "file": "RX2V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V2C1",
+      "file": "RX2V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V2C2",
+      "file": "RX2V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V2C3",
+      "file": "RX2V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V2C4",
+      "file": "RX2V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V3C1",
+      "file": "RX2V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V3C2",
+      "file": "RX2V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V3C3",
+      "file": "RX2V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX2V3C4",
+      "file": "RX2V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID3",
+      "file": "DRUGID3",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR3",
+      "file": "PRESCR3",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB3",
+      "file": "CONTSUB3",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT3",
+      "file": "COMSTAT3",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX3CAT1",
+      "file": "RX3CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3CAT2",
+      "file": "RX3CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3CAT3",
+      "file": "RX3CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3CAT4",
+      "file": "RX3CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V1C1",
+      "file": "RX3V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V1C2",
+      "file": "RX3V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V1C3",
+      "file": "RX3V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V1C4",
+      "file": "RX3V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V2C1",
+      "file": "RX3V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V2C2",
+      "file": "RX3V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V2C3",
+      "file": "RX3V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V2C4",
+      "file": "RX3V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V3C1",
+      "file": "RX3V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V3C2",
+      "file": "RX3V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V3C3",
+      "file": "RX3V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX3V3C4",
+      "file": "RX3V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID4",
+      "file": "DRUGID4",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR4",
+      "file": "PRESCR4",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB4",
+      "file": "CONTSUB4",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT4",
+      "file": "COMSTAT4",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX4CAT1",
+      "file": "RX4CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4CAT2",
+      "file": "RX4CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4CAT3",
+      "file": "RX4CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4CAT4",
+      "file": "RX4CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V1C1",
+      "file": "RX4V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V1C2",
+      "file": "RX4V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V1C3",
+      "file": "RX4V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V1C4",
+      "file": "RX4V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V2C1",
+      "file": "RX4V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V2C2",
+      "file": "RX4V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V2C3",
+      "file": "RX4V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V2C4",
+      "file": "RX4V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V3C1",
+      "file": "RX4V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V3C2",
+      "file": "RX4V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V3C3",
+      "file": "RX4V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX4V3C4",
+      "file": "RX4V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID5",
+      "file": "DRUGID5",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR5",
+      "file": "PRESCR5",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB5",
+      "file": "CONTSUB5",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT5",
+      "file": "COMSTAT5",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX5CAT1",
+      "file": "RX5CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5CAT2",
+      "file": "RX5CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5CAT3",
+      "file": "RX5CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5CAT4",
+      "file": "RX5CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V1C1",
+      "file": "RX5V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V1C2",
+      "file": "RX5V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V1C3",
+      "file": "RX5V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V1C4",
+      "file": "RX5V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V2C1",
+      "file": "RX5V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V2C2",
+      "file": "RX5V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V2C3",
+      "file": "RX5V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V2C4",
+      "file": "RX5V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V3C1",
+      "file": "RX5V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V3C2",
+      "file": "RX5V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V3C3",
+      "file": "RX5V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX5V3C4",
+      "file": "RX5V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID6",
+      "file": "DRUGID6",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR6",
+      "file": "PRESCR6",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB6",
+      "file": "CONTSUB6",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT6",
+      "file": "COMSTAT6",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX6CAT1",
+      "file": "RX6CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6CAT2",
+      "file": "RX6CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6CAT3",
+      "file": "RX6CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6CAT4",
+      "file": "RX6CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V1C1",
+      "file": "RX6V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V1C2",
+      "file": "RX6V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V1C3",
+      "file": "RX6V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V1C4",
+      "file": "RX6V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V2C1",
+      "file": "RX6V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V2C2",
+      "file": "RX6V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V2C3",
+      "file": "RX6V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V2C4",
+      "file": "RX6V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V3C1",
+      "file": "RX6V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V3C2",
+      "file": "RX6V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V3C3",
+      "file": "RX6V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX6V3C4",
+      "file": "RX6V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID7",
+      "file": "DRUGID7",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR7",
+      "file": "PRESCR7",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB7",
+      "file": "CONTSUB7",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT7",
+      "file": "COMSTAT7",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX7CAT1",
+      "file": "RX7CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7CAT2",
+      "file": "RX7CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7CAT3",
+      "file": "RX7CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7CAT4",
+      "file": "RX7CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V1C1",
+      "file": "RX7V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V1C2",
+      "file": "RX7V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V1C3",
+      "file": "RX7V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V1C4",
+      "file": "RX7V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V2C1",
+      "file": "RX7V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V2C2",
+      "file": "RX7V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V2C3",
+      "file": "RX7V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V2C4",
+      "file": "RX7V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V3C1",
+      "file": "RX7V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V3C2",
+      "file": "RX7V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V3C3",
+      "file": "RX7V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX7V3C4",
+      "file": "RX7V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID8",
+      "file": "DRUGID8",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR8",
+      "file": "PRESCR8",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB8",
+      "file": "CONTSUB8",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT8",
+      "file": "COMSTAT8",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX8CAT1",
+      "file": "RX8CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8CAT2",
+      "file": "RX8CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8CAT3",
+      "file": "RX8CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8CAT4",
+      "file": "RX8CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V1C1",
+      "file": "RX8V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V1C2",
+      "file": "RX8V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V1C3",
+      "file": "RX8V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V1C4",
+      "file": "RX8V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V2C1",
+      "file": "RX8V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V2C2",
+      "file": "RX8V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V2C3",
+      "file": "RX8V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V2C4",
+      "file": "RX8V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V3C1",
+      "file": "RX8V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V3C2",
+      "file": "RX8V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V3C3",
+      "file": "RX8V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX8V3C4",
+      "file": "RX8V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID9",
+      "file": "DRUGID9",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR9",
+      "file": "PRESCR9",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB9",
+      "file": "CONTSUB9",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT9",
+      "file": "COMSTAT9",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX9CAT1",
+      "file": "RX9CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9CAT2",
+      "file": "RX9CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9CAT3",
+      "file": "RX9CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9CAT4",
+      "file": "RX9CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V1C1",
+      "file": "RX9V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V1C2",
+      "file": "RX9V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V1C3",
+      "file": "RX9V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V1C4",
+      "file": "RX9V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V2C1",
+      "file": "RX9V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V2C2",
+      "file": "RX9V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V2C3",
+      "file": "RX9V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V2C4",
+      "file": "RX9V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V3C1",
+      "file": "RX9V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V3C2",
+      "file": "RX9V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V3C3",
+      "file": "RX9V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX9V3C4",
+      "file": "RX9V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID10",
+      "file": "DRUGID10",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR10",
+      "file": "PRESCR10",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB10",
+      "file": "CONTSUB10",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT10",
+      "file": "COMSTAT10",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX10CAT1",
+      "file": "RX10CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10CAT2",
+      "file": "RX10CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10CAT3",
+      "file": "RX10CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10CAT4",
+      "file": "RX10CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V1C1",
+      "file": "RX10V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V1C2",
+      "file": "RX10V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V1C3",
+      "file": "RX10V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V1C4",
+      "file": "RX10V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V2C1",
+      "file": "RX10V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V2C2",
+      "file": "RX10V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V2C3",
+      "file": "RX10V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V2C4",
+      "file": "RX10V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V3C1",
+      "file": "RX10V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V3C2",
+      "file": "RX10V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V3C3",
+      "file": "RX10V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX10V3C4",
+      "file": "RX10V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID11",
+      "file": "DRUGID11",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR11",
+      "file": "PRESCR11",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB11",
+      "file": "CONTSUB11",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT11",
+      "file": "COMSTAT11",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX11CAT1",
+      "file": "RX11CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11CAT2",
+      "file": "RX11CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11CAT3",
+      "file": "RX11CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11CAT4",
+      "file": "RX11CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V1C1",
+      "file": "RX11V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V1C2",
+      "file": "RX11V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V1C3",
+      "file": "RX11V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V1C4",
+      "file": "RX11V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V2C1",
+      "file": "RX11V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V2C2",
+      "file": "RX11V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V2C3",
+      "file": "RX11V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V2C4",
+      "file": "RX11V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V3C1",
+      "file": "RX11V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V3C2",
+      "file": "RX11V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V3C3",
+      "file": "RX11V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX11V3C4",
+      "file": "RX11V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID12",
+      "file": "DRUGID12",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR12",
+      "file": "PRESCR12",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB12",
+      "file": "CONTSUB12",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT12",
+      "file": "COMSTAT12",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX12CAT1",
+      "file": "RX12CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12CAT2",
+      "file": "RX12CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12CAT3",
+      "file": "RX12CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12CAT4",
+      "file": "RX12CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V1C1",
+      "file": "RX12V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V1C2",
+      "file": "RX12V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V1C3",
+      "file": "RX12V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V1C4",
+      "file": "RX12V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V2C1",
+      "file": "RX12V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V2C2",
+      "file": "RX12V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V2C3",
+      "file": "RX12V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V2C4",
+      "file": "RX12V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V3C1",
+      "file": "RX12V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V3C2",
+      "file": "RX12V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V3C3",
+      "file": "RX12V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX12V3C4",
+      "file": "RX12V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID13",
+      "file": "DRUGID13",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR13",
+      "file": "PRESCR13",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB13",
+      "file": "CONTSUB13",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT13",
+      "file": "COMSTAT13",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX13CAT1",
+      "file": "RX13CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13CAT2",
+      "file": "RX13CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13CAT3",
+      "file": "RX13CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13CAT4",
+      "file": "RX13CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V1C1",
+      "file": "RX13V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V1C2",
+      "file": "RX13V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V1C3",
+      "file": "RX13V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V1C4",
+      "file": "RX13V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V2C1",
+      "file": "RX13V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V2C2",
+      "file": "RX13V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V2C3",
+      "file": "RX13V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V2C4",
+      "file": "RX13V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V3C1",
+      "file": "RX13V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V3C2",
+      "file": "RX13V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V3C3",
+      "file": "RX13V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX13V3C4",
+      "file": "RX13V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID14",
+      "file": "DRUGID14",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR14",
+      "file": "PRESCR14",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB14",
+      "file": "CONTSUB14",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT14",
+      "file": "COMSTAT14",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX14CAT1",
+      "file": "RX14CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14CAT2",
+      "file": "RX14CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14CAT3",
+      "file": "RX14CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14CAT4",
+      "file": "RX14CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V1C1",
+      "file": "RX14V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V1C2",
+      "file": "RX14V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V1C3",
+      "file": "RX14V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V1C4",
+      "file": "RX14V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V2C1",
+      "file": "RX14V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V2C2",
+      "file": "RX14V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V2C3",
+      "file": "RX14V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V2C4",
+      "file": "RX14V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V3C1",
+      "file": "RX14V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V3C2",
+      "file": "RX14V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V3C3",
+      "file": "RX14V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX14V3C4",
+      "file": "RX14V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID15",
+      "file": "DRUGID15",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR15",
+      "file": "PRESCR15",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB15",
+      "file": "CONTSUB15",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT15",
+      "file": "COMSTAT15",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX15CAT1",
+      "file": "RX15CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15CAT2",
+      "file": "RX15CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15CAT3",
+      "file": "RX15CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15CAT4",
+      "file": "RX15CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V1C1",
+      "file": "RX15V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V1C2",
+      "file": "RX15V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V1C3",
+      "file": "RX15V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V1C4",
+      "file": "RX15V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V2C1",
+      "file": "RX15V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V2C2",
+      "file": "RX15V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V2C3",
+      "file": "RX15V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V2C4",
+      "file": "RX15V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V3C1",
+      "file": "RX15V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V3C2",
+      "file": "RX15V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V3C3",
+      "file": "RX15V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX15V3C4",
+      "file": "RX15V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID16",
+      "file": "DRUGID16",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR16",
+      "file": "PRESCR16",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB16",
+      "file": "CONTSUB16",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT16",
+      "file": "COMSTAT16",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX16CAT1",
+      "file": "RX16CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16CAT2",
+      "file": "RX16CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16CAT3",
+      "file": "RX16CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16CAT4",
+      "file": "RX16CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V1C1",
+      "file": "RX16V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V1C2",
+      "file": "RX16V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V1C3",
+      "file": "RX16V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V1C4",
+      "file": "RX16V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V2C1",
+      "file": "RX16V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V2C2",
+      "file": "RX16V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V2C3",
+      "file": "RX16V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V2C4",
+      "file": "RX16V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V3C1",
+      "file": "RX16V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V3C2",
+      "file": "RX16V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V3C3",
+      "file": "RX16V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX16V3C4",
+      "file": "RX16V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID17",
+      "file": "DRUGID17",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR17",
+      "file": "PRESCR17",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB17",
+      "file": "CONTSUB17",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT17",
+      "file": "COMSTAT17",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX17CAT1",
+      "file": "RX17CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17CAT2",
+      "file": "RX17CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17CAT3",
+      "file": "RX17CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17CAT4",
+      "file": "RX17CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V1C1",
+      "file": "RX17V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V1C2",
+      "file": "RX17V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V1C3",
+      "file": "RX17V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V1C4",
+      "file": "RX17V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V2C1",
+      "file": "RX17V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V2C2",
+      "file": "RX17V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V2C3",
+      "file": "RX17V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V2C4",
+      "file": "RX17V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V3C1",
+      "file": "RX17V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V3C2",
+      "file": "RX17V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V3C3",
+      "file": "RX17V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX17V3C4",
+      "file": "RX17V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID18",
+      "file": "DRUGID18",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR18",
+      "file": "PRESCR18",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB18",
+      "file": "CONTSUB18",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT18",
+      "file": "COMSTAT18",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX18CAT1",
+      "file": "RX18CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18CAT2",
+      "file": "RX18CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18CAT3",
+      "file": "RX18CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18CAT4",
+      "file": "RX18CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V1C1",
+      "file": "RX18V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V1C2",
+      "file": "RX18V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V1C3",
+      "file": "RX18V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V1C4",
+      "file": "RX18V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V2C1",
+      "file": "RX18V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V2C2",
+      "file": "RX18V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V2C3",
+      "file": "RX18V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V2C4",
+      "file": "RX18V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V3C1",
+      "file": "RX18V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V3C2",
+      "file": "RX18V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V3C3",
+      "file": "RX18V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX18V3C4",
+      "file": "RX18V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID19",
+      "file": "DRUGID19",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR19",
+      "file": "PRESCR19",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB19",
+      "file": "CONTSUB19",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT19",
+      "file": "COMSTAT19",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX19CAT1",
+      "file": "RX19CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19CAT2",
+      "file": "RX19CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19CAT3",
+      "file": "RX19CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19CAT4",
+      "file": "RX19CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V1C1",
+      "file": "RX19V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V1C2",
+      "file": "RX19V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V1C3",
+      "file": "RX19V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V1C4",
+      "file": "RX19V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V2C1",
+      "file": "RX19V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V2C2",
+      "file": "RX19V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V2C3",
+      "file": "RX19V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V2C4",
+      "file": "RX19V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V3C1",
+      "file": "RX19V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V3C2",
+      "file": "RX19V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V3C3",
+      "file": "RX19V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX19V3C4",
+      "file": "RX19V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID20",
+      "file": "DRUGID20",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR20",
+      "file": "PRESCR20",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB20",
+      "file": "CONTSUB20",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT20",
+      "file": "COMSTAT20",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX20CAT1",
+      "file": "RX20CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20CAT2",
+      "file": "RX20CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20CAT3",
+      "file": "RX20CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20CAT4",
+      "file": "RX20CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V1C1",
+      "file": "RX20V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V1C2",
+      "file": "RX20V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V1C3",
+      "file": "RX20V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V1C4",
+      "file": "RX20V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V2C1",
+      "file": "RX20V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V2C2",
+      "file": "RX20V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V2C3",
+      "file": "RX20V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V2C4",
+      "file": "RX20V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V3C1",
+      "file": "RX20V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V3C2",
+      "file": "RX20V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V3C3",
+      "file": "RX20V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX20V3C4",
+      "file": "RX20V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID21",
+      "file": "DRUGID21",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR21",
+      "file": "PRESCR21",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB21",
+      "file": "CONTSUB21",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT21",
+      "file": "COMSTAT21",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX21CAT1",
+      "file": "RX21CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21CAT2",
+      "file": "RX21CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21CAT3",
+      "file": "RX21CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21CAT4",
+      "file": "RX21CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V1C1",
+      "file": "RX21V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V1C2",
+      "file": "RX21V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V1C3",
+      "file": "RX21V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V1C4",
+      "file": "RX21V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V2C1",
+      "file": "RX21V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V2C2",
+      "file": "RX21V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V2C3",
+      "file": "RX21V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V2C4",
+      "file": "RX21V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V3C1",
+      "file": "RX21V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V3C2",
+      "file": "RX21V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V3C3",
+      "file": "RX21V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX21V3C4",
+      "file": "RX21V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID22",
+      "file": "DRUGID22",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR22",
+      "file": "PRESCR22",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB22",
+      "file": "CONTSUB22",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT22",
+      "file": "COMSTAT22",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX22CAT1",
+      "file": "RX22CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22CAT2",
+      "file": "RX22CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22CAT3",
+      "file": "RX22CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22CAT4",
+      "file": "RX22CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V1C1",
+      "file": "RX22V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V1C2",
+      "file": "RX22V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V1C3",
+      "file": "RX22V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V1C4",
+      "file": "RX22V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V2C1",
+      "file": "RX22V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V2C2",
+      "file": "RX22V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V2C3",
+      "file": "RX22V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V2C4",
+      "file": "RX22V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V3C1",
+      "file": "RX22V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V3C2",
+      "file": "RX22V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V3C3",
+      "file": "RX22V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX22V3C4",
+      "file": "RX22V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID23",
+      "file": "DRUGID23",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR23",
+      "file": "PRESCR23",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB23",
+      "file": "CONTSUB23",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT23",
+      "file": "COMSTAT23",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX23CAT1",
+      "file": "RX23CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23CAT2",
+      "file": "RX23CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23CAT3",
+      "file": "RX23CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23CAT4",
+      "file": "RX23CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V1C1",
+      "file": "RX23V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V1C2",
+      "file": "RX23V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V1C3",
+      "file": "RX23V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V1C4",
+      "file": "RX23V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V2C1",
+      "file": "RX23V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V2C2",
+      "file": "RX23V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V2C3",
+      "file": "RX23V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V2C4",
+      "file": "RX23V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V3C1",
+      "file": "RX23V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V3C2",
+      "file": "RX23V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V3C3",
+      "file": "RX23V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX23V3C4",
+      "file": "RX23V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID24",
+      "file": "DRUGID24",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR24",
+      "file": "PRESCR24",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB24",
+      "file": "CONTSUB24",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT24",
+      "file": "COMSTAT24",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX24CAT1",
+      "file": "RX24CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24CAT2",
+      "file": "RX24CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24CAT3",
+      "file": "RX24CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24CAT4",
+      "file": "RX24CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V1C1",
+      "file": "RX24V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V1C2",
+      "file": "RX24V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V1C3",
+      "file": "RX24V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V1C4",
+      "file": "RX24V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V2C1",
+      "file": "RX24V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V2C2",
+      "file": "RX24V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V2C3",
+      "file": "RX24V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V2C4",
+      "file": "RX24V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V3C1",
+      "file": "RX24V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V3C2",
+      "file": "RX24V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V3C3",
+      "file": "RX24V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX24V3C4",
+      "file": "RX24V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID25",
+      "file": "DRUGID25",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR25",
+      "file": "PRESCR25",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB25",
+      "file": "CONTSUB25",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT25",
+      "file": "COMSTAT25",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX25CAT1",
+      "file": "RX25CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25CAT2",
+      "file": "RX25CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25CAT3",
+      "file": "RX25CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25CAT4",
+      "file": "RX25CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V1C1",
+      "file": "RX25V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V1C2",
+      "file": "RX25V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V1C3",
+      "file": "RX25V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V1C4",
+      "file": "RX25V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V2C1",
+      "file": "RX25V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V2C2",
+      "file": "RX25V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V2C3",
+      "file": "RX25V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V2C4",
+      "file": "RX25V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V3C1",
+      "file": "RX25V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V3C2",
+      "file": "RX25V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V3C3",
+      "file": "RX25V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX25V3C4",
+      "file": "RX25V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID26",
+      "file": "DRUGID26",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR26",
+      "file": "PRESCR26",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB26",
+      "file": "CONTSUB26",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT26",
+      "file": "COMSTAT26",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX26CAT1",
+      "file": "RX26CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26CAT2",
+      "file": "RX26CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26CAT3",
+      "file": "RX26CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26CAT4",
+      "file": "RX26CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V1C1",
+      "file": "RX26V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V1C2",
+      "file": "RX26V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V1C3",
+      "file": "RX26V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V1C4",
+      "file": "RX26V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V2C1",
+      "file": "RX26V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V2C2",
+      "file": "RX26V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V2C3",
+      "file": "RX26V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V2C4",
+      "file": "RX26V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V3C1",
+      "file": "RX26V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V3C2",
+      "file": "RX26V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V3C3",
+      "file": "RX26V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX26V3C4",
+      "file": "RX26V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID27",
+      "file": "DRUGID27",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR27",
+      "file": "PRESCR27",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB27",
+      "file": "CONTSUB27",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT27",
+      "file": "COMSTAT27",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX27CAT1",
+      "file": "RX27CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27CAT2",
+      "file": "RX27CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27CAT3",
+      "file": "RX27CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27CAT4",
+      "file": "RX27CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V1C1",
+      "file": "RX27V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V1C2",
+      "file": "RX27V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V1C3",
+      "file": "RX27V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V1C4",
+      "file": "RX27V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V2C1",
+      "file": "RX27V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V2C2",
+      "file": "RX27V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V2C3",
+      "file": "RX27V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V2C4",
+      "file": "RX27V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V3C1",
+      "file": "RX27V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V3C2",
+      "file": "RX27V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V3C3",
+      "file": "RX27V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX27V3C4",
+      "file": "RX27V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID28",
+      "file": "DRUGID28",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR28",
+      "file": "PRESCR28",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB28",
+      "file": "CONTSUB28",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT28",
+      "file": "COMSTAT28",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX28CAT1",
+      "file": "RX28CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28CAT2",
+      "file": "RX28CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28CAT3",
+      "file": "RX28CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28CAT4",
+      "file": "RX28CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V1C1",
+      "file": "RX28V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V1C2",
+      "file": "RX28V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V1C3",
+      "file": "RX28V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V1C4",
+      "file": "RX28V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V2C1",
+      "file": "RX28V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V2C2",
+      "file": "RX28V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V2C3",
+      "file": "RX28V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V2C4",
+      "file": "RX28V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V3C1",
+      "file": "RX28V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V3C2",
+      "file": "RX28V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V3C3",
+      "file": "RX28V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX28V3C4",
+      "file": "RX28V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID29",
+      "file": "DRUGID29",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR29",
+      "file": "PRESCR29",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB29",
+      "file": "CONTSUB29",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT29",
+      "file": "COMSTAT29",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX29CAT1",
+      "file": "RX29CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29CAT2",
+      "file": "RX29CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29CAT3",
+      "file": "RX29CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29CAT4",
+      "file": "RX29CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V1C1",
+      "file": "RX29V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V1C2",
+      "file": "RX29V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V1C3",
+      "file": "RX29V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V1C4",
+      "file": "RX29V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V2C1",
+      "file": "RX29V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V2C2",
+      "file": "RX29V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V2C3",
+      "file": "RX29V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V2C4",
+      "file": "RX29V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V3C1",
+      "file": "RX29V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V3C2",
+      "file": "RX29V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V3C3",
+      "file": "RX29V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX29V3C4",
+      "file": "RX29V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "DRUGID30",
+      "file": "DRUGID30",
+      "dtype": "object"
+    },
+    {
+      "name": "PRESCR30",
+      "file": "PRESCR30",
+      "dtype": "float64"
+    },
+    {
+      "name": "CONTSUB30",
+      "file": "CONTSUB30",
+      "dtype": "float64"
+    },
+    {
+      "name": "COMSTAT30",
+      "file": "COMSTAT30",
+      "dtype": "float64"
+    },
+    {
+      "name": "RX30CAT1",
+      "file": "RX30CAT1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30CAT2",
+      "file": "RX30CAT2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30CAT3",
+      "file": "RX30CAT3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30CAT4",
+      "file": "RX30CAT4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V1C1",
+      "file": "RX30V1C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V1C2",
+      "file": "RX30V1C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V1C3",
+      "file": "RX30V1C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V1C4",
+      "file": "RX30V1C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V2C1",
+      "file": "RX30V2C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V2C2",
+      "file": "RX30V2C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V2C3",
+      "file": "RX30V2C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V2C4",
+      "file": "RX30V2C4",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V3C1",
+      "file": "RX30V3C1",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V3C2",
+      "file": "RX30V3C2",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V3C3",
+      "file": "RX30V3C3",
+      "dtype": "object"
+    },
+    {
+      "name": "RX30V3C4",
+      "file": "RX30V3C4",
+      "dtype": "object"
+    },
+    {
+      "name": "SETTYPE",
+      "file": "SETTYPE",
+      "dtype": "float64"
+    },
+    {
+      "name": "YEAR",
+      "file": "YEAR",
+      "dtype": "float64"
+    },
+    {
+      "name": "CSTRATM",
+      "file": "CSTRATM",
+      "dtype": "float64"
+    },
+    {
+      "name": "CPSUM",
+      "file": "CPSUM",
+      "dtype": "float64"
+    },
+    {
+      "name": "PATWT",
+      "file": "PATWT",
+      "dtype": "float64"
+    },
+    {
+      "name": "EDWT",
+      "file": "EDWT",
+      "dtype": "float64"
+    }
+  ],
+  "nrows": 21061
+}
