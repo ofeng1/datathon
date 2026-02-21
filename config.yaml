@@ -1,6 +1,15 @@
-mode: csv  # csv or fhir
+mode: sas_zip
 
-# Label windows
+sas_zip:
+  zip_filename: "ed2015-sas.sas7bdat.zip"
+  # Map your SAS columns -> standardized schema
+  mapping:
+    patient_id_col: "PATIENT_ID"
+    encounter_id_col: "VISIT_ID"
+    start_time_col: "ARRIVE_TS"
+    end_time_col: "DISCHARGE_TS"   # optional
+    # encounter_type_col: "ENC_TYPE" # optional; else defaults to "ed"
+    
 ed_revisit_hours: 72
 readmit_days: 30
 
