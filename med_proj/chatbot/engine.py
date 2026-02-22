@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List #, Optional
 import xgboost as xgb
 import pandas as pd
 
 
-import joblib
+#import joblib
 import numpy as np
 
 from med_proj.chatbot.intents import (
@@ -474,6 +474,11 @@ class ChatEngine:
         if conditions:
             lines.append("")
             lines.append("**Conditions:** " + ", ".join(conditions))
+
+        canonical_conds = s.get("CONDITIONS", [])
+        if canonical_conds:
+            lines.append("")
+            lines.append("**Detected Conditions (NLP):** " + ", ".join(canonical_conds))
 
         return "\n".join(lines)
 

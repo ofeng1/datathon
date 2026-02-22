@@ -7,6 +7,81 @@ from typing import Any, Dict, List, Optional
 
 # Each extractor returns a dict of field->value pairs (may be empty).
 
+_CONDITION_SYNONYMS = {
+    "CHF": [
+        "chf", "heart failure", "congestive heart failure",
+    ],
+    "CAD": [
+        "cad", "coronary artery disease", "coronary disease",
+        "ischemic heart disease", "heart disease", "chd",
+    ],
+    "COPD": [
+        "copd", "chronic obstructive pulmonary disease", "emphysema", "chronic bronchitis",
+    ],
+    "CKD": [
+        "ckd", "chronic kidney disease", "kidney disease",
+    ],
+    "ESRD": [
+        "esrd", "end stage renal disease", "end-stage renal disease",
+    ],
+    "HTN": [
+        "htn", "hypertension", "high blood pressure",
+    ],
+    "DM": [
+        "diabetes", "diabetic", "type 1 diabetes", "type 2 diabetes",
+    ],
+    "ASTHMA": [
+        "asthma", "asthmatic", "asthma attack", "asthma exacerbation",
+    ],
+    "CANCER": [
+        "cancer", "malignant", "tumor", "oncol", "lymphoma", "leukemia",
+    ],
+    "DEPRN": [
+        "depression", "depressed", "major depressive disorder", "depressive disorder",
+    ],
+    "CEBVD": [
+        "cerebrovascular", "stroke", "cva", "cerebral vascular accident",
+    ],
+    "ALZHD": [
+        "alzheimer", "dementia", "alzheimer's disease", "alzheimer's dementia",
+    ],
+    "HYPLIPID": [
+        "hyperlipid", "high cholesterol", "hyperlipemia", "hyperlipidemia",
+    ],
+    "OBESITY": [
+        "obesity", "obese", "bmi > 30", "bmi > 30",
+    ],
+    "OSA": [
+        "sleep apnea", "osa", "obstructive sleep apnea", "sleep apnea syndrome",
+    ],
+    "OSTPRSIS": [
+        "osteoporosis", "osteopenia", "osteomalacia", "osteoporotic fracture",
+    ],
+    "EDHIV": [
+        "hiv", "human immunodeficiency virus", "hiv infection", "hiv positive",
+    ],
+    "ETOHAB": [
+        "alcohol", "alcoholism", "alcoholic", "alcohol abuse", "alcohol use disorder",
+    ],
+    "SUBSTAB": [
+        "substance", "substance abuse", "substance use disorder", "substance abuse disorder",
+    ],
+    "INJURY": [
+        "injury", "trauma", "fall", "accident", "laceration", "fracture",
+    ],
+    "HTN": [
+        "hypertension", "high blood pressure", "hypertensive", "hypertensive crisis",
+    ],
+    "DIABTYP0": [
+        "diabetes", "diabetic", "type 1 diabetes", "type 2 diabetes",
+    ],
+    "DIABTYP1": [
+        "diabetes", "diabetic", "type 1 diabetes", "type one diabetes",
+    ],
+    "DIABTYP2": [
+        "diabetes", "diabetic", "type 2 diabetes", "type two diabetes",
+    ],
+}
 _WEEKDAYS = {
     "sunday": 1, "sun": 1,
     "monday": 2, "mon": 2,
@@ -205,6 +280,24 @@ def extract_prior_visits(text: str) -> Dict[str, Any]:
         out["days_since_last_encounter"] = float(m.group(1))
     return out
 
+def extract_conditions(text: str) -> Dict[str, Any]:
+    found = []
+    t = text.lower()
+
+    for canon, syns in _CONDITION_SYNONYMS.items():
+        for s in syns:
+            if re.search(r"\b" + re.escape(s) + r"\b", t):
+                found.append(canon)
+                break
+
+    found = sorted(set(found))
+    if not found:
+        return {}
+
+    return {
+        "CONDITIONS": found, 
+        "TOTCHRON": float(len(found))
+    }
 
 _ALL_EXTRACTORS = [
     extract_age,
@@ -219,6 +312,7 @@ _ALL_EXTRACTORS = [
     extract_day_of_week,
     extract_triage,
     extract_prior_visits,
+    extract_conditions,
 ]
 
 
