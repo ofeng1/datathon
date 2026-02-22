@@ -15,8 +15,12 @@ venv/
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 .env
 .env.*
+=======
+.venv/
+>>>>>>> Stashed changes
 =======
 .venv/
 >>>>>>> Stashed changes
@@ -37,6 +41,7 @@ med_proj/data/*.zip
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 artifacts/
 *.joblib
 
@@ -51,6 +56,8 @@ artifacts/
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 # Python
 __pycache__/
@@ -60,6 +67,9 @@ __pycache__/
 artifacts/
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
