@@ -13,6 +13,8 @@ from med_proj.features.build_features import build_features
 from med_proj.modeling.train import train_one, save
 from med_proj.modeling.evaluate import evaluate
 from med_proj.rag.index import build_index
+from med_proj.data.stats import build_stats_from_raw
+import json
 
 cfg = yaml.safe_load(open("config.yaml"))
 
@@ -122,6 +124,11 @@ fit("label_ed_admit", "model_ed_admit.joblib")
 
 kb_dir = cfg["rag"]["kb_dir"]
 build_index(kb_dir, os.path.join(art_dir, "kb_index.joblib"))
+
+stats = build_stats_from_raw(raw)
+with open(os.path.join(art_dir, "stats.json"), "w") as f:
+    json.dump(stats, f, indent=2)
+print("Stats saved to", os.path.join(art_dir, "stats.json"))
 
 print("\nDONE")
 print("Artifacts saved to:", art_dir)

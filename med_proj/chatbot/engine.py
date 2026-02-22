@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
+import json
 import os
-from typing import Any, Dict, List #, Optional
-import xgboost as xgb
-import pandas as pd
+from typing import Any, Dict, List
 
-
-#import joblib
 import numpy as np
+import pandas as pd
+import xgboost as xgb
 
 from med_proj.chatbot.intents import (
     INTENT_ASSESS, INTENT_ASK, INTENT_GREETING,
@@ -128,13 +127,24 @@ class ChatEngine:
     def __init__(self) -> None:
         self.state: Dict[str, Any] = {}
         self.models: Dict[str, Any] = {}
+        self._stats: Dict[str, Any] = {}
         self._load_models()
+        self._load_stats()
 
     def _load_models(self) -> None:
         path = os.path.join(ART_DIR, _MODEL_FILE)
         m = xgb.XGBClassifier(enable_categorical=True)
         m.load_model(path)
         self.models[_MODEL_KEY] = m
+
+    def _load_stats(self) -> None:
+        path = os.path.join(ART_DIR, "stats.json")
+        if os.path.exists(path):
+            try:
+                with open(path, encoding="utf-8") as f:
+                    self._stats = json.load(f)
+            except Exception:
+                self._stats = {}
 
     def respond(self, message: str) -> str:
         intent = classify(message)
@@ -231,6 +241,11 @@ class ChatEngine:
         parts.append(self._format_patient_summary())
         parts.append("")
         parts.append(self._format_risk_scores(scores))
+
+        condition_risk = self._format_condition_risk_section()
+        if condition_risk:
+            parts.append("")
+            parts.append(condition_risk)
 
         rag_text = self._rag_recommendations(scores)
         if rag_text:
@@ -499,6 +514,39 @@ class ChatEngine:
             f"### Readmission Risk: **{pct:.1f}%** — **{label}**\n\n"
             f"{bar}"
         )
+
+    def _format_condition_risk_section(self) -> str:
+        """Format risk categories tied to conditions the user has entered."""
+        s = self.state
+        condition_ids: List[str] = []
+        for cond in _CONDITION_LABELS:
+            if s.get(cond) == 1.0:
+                condition_ids.append(cond)
+        canonical = s.get("CONDITIONS")
+        if isinstance(canonical, list):
+            for c in canonical:
+                if isinstance(c, str) and c not in condition_ids:
+                    condition_ids.append(c)
+
+        if not condition_ids:
+            return ""
+
+        cond_stats = {c["id"]: c for c in self._stats.get("conditions", [])}
+        lines = ["### Risk categories for this patient\n"]
+        lines.append(
+            "Based on the **conditions you entered**, here are relevant stats from national ED data:\n"
+        )
+        for cid in condition_ids:
+            label = _CONDITION_LABELS.get(cid, cid)
+            stat = cond_stats.get(cid)
+            if stat:
+                lines.append(
+                    f"- **{label}:** {stat['pct_72h_revisit']}% 72-hour ED revisit rate, "
+                    f"{stat['pct_admitted']}% admitted (NHAMCS sample)."
+                )
+            else:
+                lines.append(f"- **{label}:** (no aggregate stats in this dataset)")
+        return "\n".join(lines)
 
     @staticmethod
     def _risk_bar(prob: float, width: int = 20) -> str:

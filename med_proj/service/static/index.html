@@ -117,6 +117,14 @@
   .stats h3{font-size:15px;font-weight:600;margin:24px 0 10px;color:#fff}
   .stats p{font-size:14px;line-height:1.6;margin-bottom:10px}
 
+  .region-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .region-row label{font-size:13px;color:var(--text-muted);font-weight:600}
+  .region-row select{
+    padding:8px 12px;border-radius:var(--radius);border:1px solid var(--surface2);
+    background:var(--surface);color:var(--text);font-size:13px;font-family:var(--font);
+    min-width:160px;cursor:pointer;
+  }
+
   .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
   .card{background:var(--surface);border:1px solid var(--surface2);border-radius:var(--radius);padding:16px}
   .card .num{font-size:28px;font-weight:700;color:var(--accent)}
@@ -133,6 +141,9 @@
   .bar-fill.green{background:var(--green)}
   .bar-fill.blue{background:var(--accent)}
 
+  .bar-row-expand{margin-top:4px;margin-left:180px;padding:10px 12px;background:var(--surface);border:1px solid var(--surface2);border-radius:var(--radius);font-size:12px;color:var(--text-muted);display:none}
+  .bar-row-expand.open{display:block}
+
   .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}
   .info-box{background:var(--surface);border:1px solid var(--surface2);border-radius:var(--radius);padding:14px}
   .info-box h4{font-size:13px;font-weight:600;margin-bottom:6px;color:#fff}
@@ -147,6 +158,10 @@
   .fact .big.green{color:var(--green)}
   .fact .big.blue{color:var(--accent)}
   .fact .sub{font-size:11.5px;color:var(--text-muted);margin-top:2px}
+
+  .stats-loading{color:var(--text-muted);font-size:14px;padding:20px 0}
+  .learn-more-btn{background:none;border:none;color:var(--accent);cursor:pointer;font-size:11px;padding:0 4px;font-family:var(--font)}
+  .learn-more-btn:hover{text-decoration:underline}
 
   @media(max-width:600px){
     .info-grid{grid-template-columns:1fr}
@@ -191,30 +206,23 @@
   <!-- ════ STATS TAB ════ -->
   <div id="tab-stats" class="tab-content">
     <div class="stats">
-
       <h2>Understanding ED Readmissions</h2>
-      <p class="lead">Key statistics and risk factors for emergency department revisits and hospital readmissions — explained for everyone.</p>
+      <p class="lead">Explore readmission and revisit rates from NHAMCS data — by U.S. region and by condition. Use the Chat tab to assess a patient; risk categories there are tied to the conditions you enter.</p>
 
-      <!-- Key numbers -->
-      <div class="card-grid">
-        <div class="card"><div class="num">130M+</div><div class="lbl">ED visits per year in the U.S.</div></div>
-        <div class="card"><div class="num">1 in 5</div><div class="lbl">patients return to the ED within 30 days</div></div>
-        <div class="card"><div class="num">$2.6B</div><div class="lbl">annual cost of preventable readmissions</div></div>
-        <div class="card"><div class="num">3.5%</div><div class="lbl">return within just 72 hours</div></div>
+      <div class="region-row">
+        <label for="regionSelect">Show stats for:</label>
+        <select id="regionSelect">
+          <option value="0">All U.S. (national)</option>
+        </select>
       </div>
 
-      <h3>30-Day Readmission Rates by Condition</h3>
-      <p>Some chronic conditions carry much higher risk of a patient returning to the hospital within 30 days.</p>
-      <div class="bar-chart">
-        <div class="bar-row"><span class="bar-label">Heart Failure (CHF)</span><div class="bar-track"><div class="bar-fill red" style="width:50%">~25%</div></div></div>
-        <div class="bar-row"><span class="bar-label">COPD</span><div class="bar-track"><div class="bar-fill red" style="width:42%">~21%</div></div></div>
-        <div class="bar-row"><span class="bar-label">Pneumonia</span><div class="bar-track"><div class="bar-fill orange" style="width:36%">~18%</div></div></div>
-        <div class="bar-row"><span class="bar-label">Diabetes</span><div class="bar-track"><div class="bar-fill orange" style="width:30%">~15%</div></div></div>
-        <div class="bar-row"><span class="bar-label">Stroke</span><div class="bar-track"><div class="bar-fill yellow" style="width:28%">~14%</div></div></div>
-        <div class="bar-row"><span class="bar-label">Chronic Kidney Disease</span><div class="bar-track"><div class="bar-fill yellow" style="width:26%">~13%</div></div></div>
-        <div class="bar-row"><span class="bar-label">Asthma</span><div class="bar-track"><div class="bar-fill green" style="width:20%">~10%</div></div></div>
-        <div class="bar-row"><span class="bar-label">General population</span><div class="bar-track"><div class="bar-fill blue" style="width:14%">~7%</div></div></div>
+      <div id="statsCards" class="card-grid">
+        <div class="stats-loading">Loading statistics…</div>
       </div>
+
+      <h3>72-Hour ED Revisit &amp; Admission Rates by Condition</h3>
+      <p>Rates among patients with each condition in the survey. Click <strong>Learn more</strong> for context.</p>
+      <div id="statsBarChart" class="bar-chart"></div>
 
       <h3>What Makes Someone High-Risk?</h3>
       <div class="info-grid">
@@ -260,39 +268,19 @@
         </div>
       </div>
 
-      <h3>ED Visit Volume by Triage Severity</h3>
-      <p>The Emergency Severity Index (ESI) classifies patients from 1 (most critical) to 5 (least).</p>
-      <div class="bar-chart">
-        <div class="bar-row"><span class="bar-label">ESI 1 — Immediate</span><div class="bar-track"><div class="bar-fill red" style="width:3%">1–2%</div></div></div>
-        <div class="bar-row"><span class="bar-label">ESI 2 — Emergent</span><div class="bar-track"><div class="bar-fill orange" style="width:16%">~12%</div></div></div>
-        <div class="bar-row"><span class="bar-label">ESI 3 — Urgent</span><div class="bar-track"><div class="bar-fill yellow" style="width:52%">~38%</div></div></div>
-        <div class="bar-row"><span class="bar-label">ESI 4 — Semi-urgent</span><div class="bar-track"><div class="bar-fill green" style="width:44%">~32%</div></div></div>
-        <div class="bar-row"><span class="bar-label">ESI 5 — Non-urgent</span><div class="bar-track"><div class="bar-fill blue" style="width:22%">~16%</div></div></div>
-      </div>
-
       <h3>Quick Facts</h3>
       <div class="fact-strip">
-        <div class="fact"><div class="big red">25%</div><div class="sub">of CHF patients readmitted within 30 days</div></div>
+        <div class="fact"><div class="big red" id="factChf">—</div><div class="sub">CHF 30-day readmission (lit.)</div></div>
         <div class="fact"><div class="big orange">72 hrs</div><div class="sub">critical window for ED revisit risk</div></div>
-        <div class="fact"><div class="big green">40%</div><div class="sub">of readmissions are potentially preventable</div></div>
-        <div class="fact"><div class="big blue">48 hrs</div><div class="sub">recommended follow-up window for high-risk patients</div></div>
+        <div class="fact"><div class="big green">40%</div><div class="sub">of readmissions potentially preventable</div></div>
+        <div class="fact"><div class="big blue">48 hrs</div><div class="sub">follow-up window for high-risk patients</div></div>
       </div>
 
       <h3>How This Tool Works</h3>
-      <p>This chatbot uses an <strong>XGBoost machine learning model</strong> trained on the
-      <strong>NHAMCS</strong> (National Hospital Ambulatory Medical Care Survey) dataset — a nationally
-      representative survey of U.S. emergency department visits.</p>
-      <p>When you describe a patient, the system:</p>
-      <div style="margin-left:16px;font-size:14px;line-height:1.7">
-        1. <strong>Extracts</strong> clinical values (age, vitals, conditions) from your description<br>
-        2. <strong>Infers</strong> likely triage acuity based on the conditions and vitals present<br>
-        3. <strong>Runs the model</strong> with evidence-based clinical risk adjustments<br>
-        4. <strong>Retrieves</strong> relevant recommendations from a curated knowledge base
-      </div>
+      <p>This tool uses a <strong>machine learning model</strong> trained on <strong>NHAMCS</strong> (National Hospital Ambulatory Medical Care Survey) — a nationally representative survey of U.S. ED visits. In the <strong>Chat</strong> tab, when you describe a patient, risk categories and recommendations are based on the <strong>conditions you enter</strong> (e.g. COPD, CHF) so you see only relevant stats.</p>
       <p style="margin-top:12px;color:var(--text-muted);font-size:13px">
-        <em>This tool is for educational and informational purposes only. It is not a substitute for professional medical judgment.</em>
+        <em>For educational and informational purposes only. Not a substitute for professional medical judgment.</em>
       </p>
-
     </div>
   </div>
 </div>
@@ -410,6 +398,120 @@ inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') sendFromInput(
     else { statusDot.className='dot offline'; statusText.textContent='Degraded'; }
   } catch { statusDot.className='dot offline'; statusText.textContent='Offline'; }
 })();
+
+/* ─── Stats tab: fetch /stats, region selector, data-driven charts ─── */
+let statsData = null;
+const conditionLearnMore = {
+  'CHF': 'Heart failure is a leading cause of 30-day readmission. Daily weights, sodium restriction, and early follow-up reduce risk.',
+  'COPD': 'COPD exacerbations often lead to return visits. Ensure inhaler technique and a written action plan at discharge.',
+  'CKD': 'Kidney disease increases readmission risk. Monitor electrolytes and coordinate with nephrology.',
+  'ESRD': 'Dialysis patients have high ED utilization. Access issues and infection are common drivers of revisit.',
+  'CAD': 'Coronary disease may need stress testing or cardiology follow-up before discharge.',
+  'ASTHMA': 'Asthma revisits can be reduced with controller medications and trigger education.',
+  'HTN': 'Hypertension alone is a moderate risk factor; risk rises with other conditions.',
+  'DIABTYP1': 'Type 1 diabetes: hypo- and hyperglycemia drive many ED returns. Review insulin regimen at discharge.',
+  'DIABTYP2': 'Type 2 diabetes: ensure glucometer access and follow-up with primary care or diabetes educator.',
+  'DIABTYP0': 'Diabetes: medication adherence and follow-up are key to reducing readmissions.',
+  'CANCER': 'Cancer patients often have complex care needs; coordination with oncology is important.',
+  'CEBVD': 'Stroke and cerebrovascular disease need close follow-up and secondary prevention.',
+  'DEPRN': 'Depression is associated with higher readmission; screen and refer when appropriate.',
+  'ALZHD': 'Dementia increases fall and medication-related readmission risk.',
+  'SUBSTAB': 'Substance use disorder is linked to frequent ED use; warm handoff to treatment can help.',
+  'INJURY': 'Injury-related visits may return for wound care or pain; clear instructions reduce revisit.'
+};
+
+async function loadStats() {
+  if (statsData) return statsData;
+  try {
+    const r = await fetch('/stats');
+    statsData = await r.json();
+    return statsData;
+  } catch (e) {
+    console.warn('Stats load failed', e);
+    return { regions: [], conditions: [], national: {} };
+  }
+}
+
+function barColor(pct) {
+  if (pct >= 15) return 'red';
+  if (pct >= 10) return 'orange';
+  if (pct >= 6) return 'yellow';
+  if (pct >= 3) return 'green';
+  return 'blue';
+}
+
+function renderStatsCards(regionId) {
+  const c = document.getElementById('statsCards');
+  if (!c) return;
+  const national = statsData?.national || {};
+  const regions = statsData?.regions || [];
+  const r = regionId === 0 || !regionId ? national : regions.find(x => x.id === regionId) || national;
+  const label = regionId === 0 || !regionId ? 'U.S.' : (regions.find(x => x.id === regionId)?.name || 'U.S.');
+  const n = r.n_visits != null ? r.n_visits : national.n_visits;
+  const p72 = r.pct_72h_revisit != null ? r.pct_72h_revisit : national.pct_72h_revisit;
+  const pAdm = r.pct_admitted != null ? r.pct_admitted : national.pct_admitted;
+  c.innerHTML = ''
+    + '<div class="card"><div class="num">' + (n != null ? n.toLocaleString() : '—') + '</div><div class="lbl">ED visits in sample (' + label + ')</div></div>'
+    + '<div class="card"><div class="num">' + (p72 != null ? p72 + '%' : '—') + '</div><div class="lbl">72-hour ED revisit rate</div></div>'
+    + '<div class="card"><div class="num">' + (pAdm != null ? pAdm + '%' : '—') + '</div><div class="lbl">Admitted to hospital</div></div>'
+    + '<div class="card"><div class="num">' + (national.n_visits != null ? national.n_visits.toLocaleString() : '—') + '</div><div class="lbl">National sample size (NHAMCS)</div></div>';
+}
+
+function renderStatsBars() {
+  const el = document.getElementById('statsBarChart');
+  if (!el || !statsData?.conditions?.length) {
+    if (el) el.innerHTML = '<p class="stats-loading">No condition data available. Run the pipeline to build stats.</p>';
+    return;
+  }
+  const maxPct = Math.max(...statsData.conditions.map(x => x.pct_72h_revisit), 1);
+  let html = '';
+  statsData.conditions.forEach((cond, i) => {
+    const pct = cond.pct_72h_revisit;
+    const w = Math.max(5, (pct / maxPct) * 100);
+    const color = barColor(pct);
+    const id = 'learn-' + cond.id.replace(/\W/g, '_');
+    const desc = conditionLearnMore[cond.id] || 'Condition-specific revisit and admission rates from NHAMCS data.';
+    html += '<div class="bar-row">'
+      + '<span class="bar-label">' + cond.name + '</span>'
+      + '<div class="bar-track"><div class="bar-fill ' + color + '" style="width:' + w + '%">' + pct + '%</div></div>'
+      + ' <button type="button" class="learn-more-btn" onclick="toggleLearn(\'' + id + '\')">Learn more</button>'
+      + '</div>'
+      + '<div id="' + id + '" class="bar-row-expand">' + desc + '</div>';
+  });
+  el.innerHTML = html;
+}
+
+function toggleLearn(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+window.toggleLearn = toggleLearn;
+
+function onRegionChange() {
+  const sel = document.getElementById('regionSelect');
+  const v = sel ? parseInt(sel.value, 10) : 0;
+  renderStatsCards(v);
+}
+
+async function initStatsTab() {
+  statsData = await loadStats();
+  const sel = document.getElementById('regionSelect');
+  if (sel && statsData.regions?.length) {
+    sel.innerHTML = '<option value="0">All U.S. (national)</option>'
+      + statsData.regions.map(r => '<option value="' + r.id + '">' + r.name + '</option>').join('');
+    sel.addEventListener('change', onRegionChange);
+  }
+  renderStatsCards(0);
+  renderStatsBars();
+  const chf = statsData.conditions?.find(c => c.id === 'CHF');
+  const factChf = document.getElementById('factChf');
+  if (factChf && chf) factChf.textContent = chf.pct_admitted + '%';
+}
+
+document.querySelector('.tab-bar button[onclick="switchTab(\'stats\')"]')?.addEventListener('click', function onStatsClick() {
+  setTimeout(initStatsTab, 50);
+});
 
 inputEl.focus();
 </script>
