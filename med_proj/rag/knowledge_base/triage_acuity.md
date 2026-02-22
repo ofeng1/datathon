@@ -24,10 +24,6 @@ Abnormal vitals at triage increase risk of admission and poor outcomes:
 
 Patients presenting with ≥ 2 abnormal vitals should be flagged for admission risk evaluation.
 
-## Ambulance Arrival (ARREMS)
-
-Arrival by EMS (ARREMS = 1) is associated with higher acuity and admission rates. These patients warrant close monitoring and early disposition planning.
-
 ## Pain Assessment
 
 PAINSCALE ≥ 7 (severe pain) is associated with:

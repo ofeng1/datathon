@@ -242,15 +242,15 @@ class ChatEngine:
         parts.append("")
         parts.append(self._format_risk_scores(scores))
 
-        condition_risk = self._format_condition_risk_section()
-        if condition_risk:
-            parts.append("")
-            parts.append(condition_risk)
-
         rag_text = self._rag_recommendations(scores)
         if rag_text:
             parts.append("")
             parts.append(rag_text)
+
+        condition_risk = self._format_condition_risk_section()
+        if condition_risk:
+            parts.append("")
+            parts.append(condition_risk)
 
         parts.append("\n---")
         parts.append(
