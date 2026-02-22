@@ -12,32 +12,8 @@ build/
 .mypy_cache/
 .venv/
 venv/
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 .env
 .env.*
-=======
-.venv/
->>>>>>> Stashed changes
-=======
-.venv/
->>>>>>> Stashed changes
-=======
-.venv/
->>>>>>> Stashed changes
-=======
-.venv/
->>>>>>> Stashed changes
-=======
-.venv/
->>>>>>> Stashed changes
-=======
-.venv/
->>>>>>> Stashed changes
 
 # macOS
 .DS_Store
@@ -46,12 +22,6 @@ venv/
 # Data / extracted files
 med_proj/data/*.sas7bdat
 med_proj/data/*.zip
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 artifacts/
 *.joblib
 
@@ -61,37 +31,3 @@ artifacts/
 # IDE
 .vscode/
 .idea/
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-
-# Python
-__pycache__/
-*.pyc
-
-# Artifacts (rebuilt by pipeline)
-artifacts/
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
