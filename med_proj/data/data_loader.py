@@ -31,6 +31,10 @@ class DataLoader:
         df = pd.read_sas(sas_path)
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+        print(f"Loaded shape: {df.shape}")
+>>>>>>> Stashed changes
 =======
         print(f"Loaded shape: {df.shape}")
 >>>>>>> Stashed changes
