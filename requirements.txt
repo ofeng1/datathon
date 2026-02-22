@@ -8,3 +8,5 @@ scikit-learn==1.5.2
 joblib==1.4.2
 fastapi==0.115.6
 uvicorn==0.32.1
+matplotlib==3.10.1
+xgboost==2.2.1
