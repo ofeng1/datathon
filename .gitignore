@@ -17,8 +17,12 @@ venv/
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 .env
 .env.*
+=======
+.venv/
+>>>>>>> Stashed changes
 =======
 .venv/
 >>>>>>> Stashed changes
@@ -47,6 +51,7 @@ med_proj/data/*.zip
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 artifacts/
 *.joblib
 
@@ -57,6 +62,8 @@ artifacts/
 .vscode/
 .idea/
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -76,6 +83,9 @@ artifacts/
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
