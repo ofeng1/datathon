@@ -29,7 +29,7 @@ config.yaml
      │
 ┌─────────────────────────────────────────────────────────────────┐
 │  RUNTIME: FastAPI service (med_proj/service/api.py)             │
-│  • Loads XGBoost readmission model + stats at startup            │
+│  • Loads readmission model + stats at startup            │
 │  • /chat → ChatEngine (state, intent, extract, predict, RAG)     │
 │  • /parse-ed-document → PDF → parsed state for merge into chat   │
 │  • /health, /stats → status and stats for UI                     │
