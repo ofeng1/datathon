@@ -12,8 +12,12 @@ build/
 .mypy_cache/
 .venv/
 venv/
+<<<<<<< Updated upstream
 .env
 .env.*
+=======
+.venv/
+>>>>>>> Stashed changes
 
 # macOS
 .DS_Store
@@ -22,6 +26,7 @@ venv/
 # Data / extracted files
 med_proj/data/*.sas7bdat
 med_proj/data/*.zip
+<<<<<<< Updated upstream
 artifacts/
 *.joblib
 
@@ -31,3 +36,12 @@ artifacts/
 # IDE
 .vscode/
 .idea/
+=======
+
+# Python
+__pycache__/
+*.pyc
+
+# Artifacts (rebuilt by pipeline)
+artifacts/
+>>>>>>> Stashed changes

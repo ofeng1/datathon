@@ -4,12 +4,16 @@ import pandas as pd
 
 
 class DataLoader:
+    def load_data(self, zip_filename: str):
+        project_root = Path(".").resolve()
+        data_dir = project_root / "med_proj" / "data"
 
-    def load_data(self, zip_path: str):
+        zip_path = data_dir / zip_filename
 
-        data_dir = Path(".").resolve()
-        zip_path = data_dir / zip_path
+        if not zip_path.exists():
+            raise FileNotFoundError(f"Zip file not found: {zip_path}")
 
+        # Extract into data_dir (not project root)
         with zipfile.ZipFile(zip_path, "r") as zf:
             zf.extractall(path=data_dir)
 
@@ -26,4 +30,8 @@ class DataLoader:
 
         df = pd.read_sas(sas_path)
 
+<<<<<<< Updated upstream
+=======
+        print(f"Loaded shape: {df.shape}")
+>>>>>>> Stashed changes
         return df
