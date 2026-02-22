@@ -17,12 +17,29 @@ _WEEKDAYS = {
     "saturday": 7, "sat": 7,
 }
 
-_CHRONIC_KEYWORDS = [
-    "copd", "chf", "heart failure", "diabetes", "diabetic", "ckd",
-    "kidney disease", "esrd", "asthma", "hypertension", "htn",
-    "depression", "anxiety", "cancer", "obesity", "substance",
-    "alcohol", "liver", "stroke", "hiv",
-]
+_CONDITION_TO_NHAMCS = {
+    r"copd|chronic\s*obstructive":                          "COPD",
+    r"chf|congestive\s*heart\s*failure|heart\s*failure":    "CHF",
+    r"cad|coronary\s*artery":                               "CAD",
+    r"asthma":                                              "ASTHMA",
+    r"ckd|chronic\s*kidney|kidney\s*disease":               "CKD",
+    r"esrd|end[\s-]*stage\s*renal":                         "ESRD",
+    r"hypertension|htn|\bhigh\s*blood\s*pressure":          "HTN",
+    r"diabet(?:es|ic)\s*(?:type\s*)?(?:1|i(?!i))\b":       "DIABTYP1",
+    r"diabet(?:es|ic)\s*(?:type\s*)?(?:2|ii)\b":           "DIABTYP2",
+    r"diabet(?:es|ic)":                                     "DIABTYP0",
+    r"cancer|malignan|lymphoma|leukemia|tumor|oncol":       "CANCER",
+    r"depression|depressed|major\s*depress":                "DEPRN",
+    r"cerebrovascular|stroke|\bcva\b":                      "CEBVD",
+    r"alzheimer|dementia":                                  "ALZHD",
+    r"hyperlipid|high\s*cholesterol":                       "HYPLIPID",
+    r"obesity|obese|\bbmi\s*>\s*3[0-9]":                    "OBESITY",
+    r"sleep\s*apnea|\bosa\b":                               "OSA",
+    r"osteoporosis":                                        "OSTPRSIS",
+    r"\bhiv\b|human\s*immunodeficiency":                    "EDHIV",
+    r"alcohol(?:ism|ic|\s*abuse|use\s*disorder)":           "ETOHAB",
+    r"substance\s*abuse|drug\s*abuse|sud\b":                "SUBSTAB",
+}
 
 
 def _float(s: str) -> Optional[float]:
@@ -125,14 +142,31 @@ def extract_lov(text: str) -> Dict[str, Any]:
 
 
 def extract_chronic(text: str) -> Dict[str, Any]:
-    m = re.search(r'(\d+)\s*(?:chronic)?\s*(?:condition|comorbidit|disease)', text, re.I)
-    if m:
-        return {"TOTCHRON": _float(m.group(1))}
+    out: Dict[str, Any] = {}
+    matched_flags: set = set()
 
-    count = sum(1 for kw in _CHRONIC_KEYWORDS if re.search(r'\b' + kw + r'\b', text, re.I))
-    if count > 0:
-        return {"TOTCHRON": float(count)}
-    return {}
+    for pattern, col in _CONDITION_TO_NHAMCS.items():
+        if col in matched_flags:
+            continue
+        if re.search(pattern, text, re.I):
+            out[col] = 1.0
+            matched_flags.add(col)
+
+    if "DIABTYP0" in out and ("DIABTYP1" in out or "DIABTYP2" in out):
+        del out["DIABTYP0"]
+
+    explicit = re.search(r'(\d+)\s*(?:chronic)?\s*(?:condition|comorbidit|disease)', text, re.I)
+    if explicit:
+        out["TOTCHRON"] = _float(explicit.group(1))
+    elif matched_flags:
+        out["TOTCHRON"] = float(len(matched_flags))
+
+    if matched_flags:
+        out["NOCHRON"] = 0.0
+    elif "TOTCHRON" in out and out["TOTCHRON"] == 0:
+        out["NOCHRON"] = 1.0
+
+    return out
 
 
 def extract_injury(text: str) -> Dict[str, Any]:
@@ -142,7 +176,7 @@ def extract_injury(text: str) -> Dict[str, Any]:
 
 
 def extract_substance(text: str) -> Dict[str, Any]:
-    if re.search(r'\b(substance\s*abuse|drug\s*abuse|alcoholi|intoxicat|overdose)\b', text, re.I):
+    if re.search(r'\b(substance\s*abuse|drug\s*abuse|alcoholi|intoxicat|overdose|drug\s*use)\b', text, re.I):
         return {"SUBSTAB": 1.0}
     return {}
 

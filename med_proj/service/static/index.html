@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ED Risk Chatbot</title>
+<title>ED Risk Assessment</title>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --bg:#0f172a;--surface:#1e293b;--surface2:#334155;
     --text:#e2e8f0;--text-muted:#94a3b8;--accent:#3b82f6;
     --accent-hover:#2563eb;--green:#22c55e;--yellow:#eab308;
-    --red:#ef4444;--radius:12px;--font:'Segoe UI',system-ui,-apple-system,sans-serif;
+    --red:#ef4444;--orange:#f97316;--radius:12px;
+    --font:'Segoe UI',system-ui,-apple-system,sans-serif;
   }
   html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--text)}
 
-  .app{display:flex;flex-direction:column;height:100vh;max-width:820px;margin:0 auto}
+  /* ── Layout ── */
+  .shell{display:flex;flex-direction:column;height:100vh;max-width:900px;margin:0 auto}
 
   header{
-    padding:16px 24px;border-bottom:1px solid var(--surface2);
-    display:flex;align-items:center;gap:12px;
+    padding:14px 24px;border-bottom:1px solid var(--surface2);
+    display:flex;align-items:center;gap:12px;flex-shrink:0;
   }
   header .logo{
-    width:40px;height:40px;border-radius:10px;background:var(--accent);
-    display:flex;align-items:center;justify-content:center;font-size:20px;
-    flex-shrink:0;
+    width:36px;height:36px;border-radius:8px;background:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
   }
-  header h1{font-size:18px;font-weight:600}
-  header .subtitle{font-size:13px;color:var(--text-muted)}
+  header h1{font-size:17px;font-weight:600}
   header .status{
     margin-left:auto;display:flex;align-items:center;gap:6px;
     font-size:12px;color:var(--text-muted);
@@ -34,100 +34,333 @@
   header .status .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
   header .status .dot.offline{background:var(--red)}
 
-  .messages{
-    flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;
+  /* ── Tabs ── */
+  .tab-bar{
+    display:flex;border-bottom:1px solid var(--surface2);flex-shrink:0;
   }
+  .tab-bar button{
+    flex:1;padding:10px 0;background:none;border:none;border-bottom:2px solid transparent;
+    color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;
+    font-family:var(--font);transition:all .15s;
+  }
+  .tab-bar button:hover{color:var(--text)}
+  .tab-bar button.active{color:var(--accent);border-bottom-color:var(--accent)}
 
-  .msg{display:flex;gap:12px;max-width:90%;animation:fadeIn .25s ease}
+  .tab-content{flex:1;overflow:hidden;display:none;flex-direction:column}
+  .tab-content.active{display:flex}
+
+  /* ── Chat tab ── */
+  .messages{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:14px}
+  .msg{display:flex;gap:10px;max-width:92%;animation:fadeIn .25s ease}
   .msg.bot{align-self:flex-start}
   .msg.user{align-self:flex-end;flex-direction:row-reverse}
-
   .msg .avatar{
-    width:32px;height:32px;border-radius:8px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;font-size:14px;
+    width:30px;height:30px;border-radius:8px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
   }
   .msg.bot .avatar{background:var(--accent)}
   .msg.user .avatar{background:var(--surface2)}
-
   .msg .bubble{
-    padding:12px 16px;border-radius:var(--radius);line-height:1.55;
-    font-size:14px;white-space:pre-wrap;word-break:break-word;
+    padding:12px 16px;border-radius:var(--radius);line-height:1.6;font-size:13.5px;word-break:break-word;
   }
   .msg.bot .bubble{background:var(--surface);border:1px solid var(--surface2)}
-  .msg.user .bubble{background:var(--accent);color:#fff}
+  .msg.user .bubble{background:var(--accent);color:#fff;white-space:pre-wrap}
+
+  .bubble h3{font-size:14px;font-weight:700;margin:10px 0 4px;color:#fff}
+  .bubble h3:first-child{margin-top:0}
+  .bubble h4{font-size:13.5px;font-weight:600;margin:8px 0 3px;color:var(--text)}
+  .bubble strong{color:#fff}
+  .bubble em{color:var(--text-muted);font-style:italic}
+  .bubble p{margin:3px 0}
+  .bubble ul,.bubble ol{margin:3px 0 3px 18px}
+  .bubble li{margin:2px 0}
+  .bubble hr{border:none;border-top:1px solid var(--surface2);margin:8px 0}
+  .bubble table{border-collapse:collapse;margin:6px 0;width:100%;font-size:12.5px}
+  .bubble th,.bubble td{padding:4px 8px;border:1px solid var(--surface2);text-align:left}
+  .bubble th{background:var(--surface2);font-weight:600}
+
+  .suggestions{padding:0 24px 10px;display:flex;flex-wrap:wrap;gap:6px}
+  .suggestions button{
+    padding:5px 12px;border-radius:20px;border:1px solid var(--surface2);
+    background:transparent;color:var(--text-muted);font-size:11.5px;
+    cursor:pointer;transition:all .15s;font-family:var(--font);
+  }
+  .suggestions button:hover{border-color:var(--accent);color:var(--accent)}
 
   .input-area{
-    padding:16px 24px;border-top:1px solid var(--surface2);
-    display:flex;gap:10px;
+    padding:12px 24px;border-top:1px solid var(--surface2);display:flex;gap:8px;flex-shrink:0;
   }
   .input-area input{
-    flex:1;padding:12px 16px;border-radius:var(--radius);border:1px solid var(--surface2);
-    background:var(--surface);color:var(--text);font-size:14px;font-family:var(--font);
+    flex:1;padding:10px 14px;border-radius:var(--radius);border:1px solid var(--surface2);
+    background:var(--surface);color:var(--text);font-size:13.5px;font-family:var(--font);
     outline:none;transition:border-color .15s;
   }
   .input-area input:focus{border-color:var(--accent)}
   .input-area input::placeholder{color:var(--text-muted)}
-
   .input-area button{
-    padding:12px 20px;border-radius:var(--radius);border:none;
-    background:var(--accent);color:#fff;font-size:14px;font-weight:600;
+    padding:10px 18px;border-radius:var(--radius);border:none;
+    background:var(--accent);color:#fff;font-size:13.5px;font-weight:600;
     cursor:pointer;transition:background .15s;font-family:var(--font);
   }
   .input-area button:hover{background:var(--accent-hover)}
   .input-area button:disabled{opacity:.5;cursor:not-allowed}
 
-  .suggestions{
-    padding:0 24px 12px;display:flex;flex-wrap:wrap;gap:8px;
-  }
-  .suggestions button{
-    padding:6px 14px;border-radius:20px;border:1px solid var(--surface2);
-    background:transparent;color:var(--text-muted);font-size:12px;
-    cursor:pointer;transition:all .15s;font-family:var(--font);
-  }
-  .suggestions button:hover{border-color:var(--accent);color:var(--accent)}
-
   .typing{display:flex;gap:4px;padding:4px 0}
-  .typing span{
-    width:6px;height:6px;border-radius:50%;background:var(--text-muted);
-    animation:bounce .6s infinite alternate;
-  }
+  .typing span{width:5px;height:5px;border-radius:50%;background:var(--text-muted);animation:bounce .6s infinite alternate}
   .typing span:nth-child(2){animation-delay:.15s}
   .typing span:nth-child(3){animation-delay:.3s}
 
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  @keyframes bounce{to{transform:translateY(-6px);opacity:.4}}
+  /* ── Stats tab ── */
+  .stats{flex:1;overflow-y:auto;padding:28px 24px}
+  .stats h2{font-size:20px;font-weight:700;margin-bottom:4px}
+  .stats .lead{color:var(--text-muted);font-size:14px;margin-bottom:24px}
+  .stats h3{font-size:15px;font-weight:600;margin:24px 0 10px;color:#fff}
+  .stats p{font-size:14px;line-height:1.6;margin-bottom:10px}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+  .card{background:var(--surface);border:1px solid var(--surface2);border-radius:var(--radius);padding:16px}
+  .card .num{font-size:28px;font-weight:700;color:var(--accent)}
+  .card .lbl{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+  .bar-chart{margin:12px 0 20px}
+  .bar-row{display:flex;align-items:center;margin-bottom:8px;gap:10px}
+  .bar-label{width:170px;font-size:13px;text-align:right;flex-shrink:0;color:var(--text-muted)}
+  .bar-track{flex:1;height:22px;background:var(--surface2);border-radius:4px;overflow:hidden;position:relative}
+  .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:600;color:#fff;transition:width .5s ease}
+  .bar-fill.red{background:var(--red)}
+  .bar-fill.orange{background:var(--orange)}
+  .bar-fill.yellow{background:var(--yellow)}
+  .bar-fill.green{background:var(--green)}
+  .bar-fill.blue{background:var(--accent)}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}
+  .info-box{background:var(--surface);border:1px solid var(--surface2);border-radius:var(--radius);padding:14px}
+  .info-box h4{font-size:13px;font-weight:600;margin-bottom:6px;color:#fff}
+  .info-box ul{margin:0 0 0 16px;font-size:13px;color:var(--text-muted)}
+  .info-box li{margin:3px 0}
+
+  .fact-strip{display:flex;gap:12px;margin:16px 0;overflow-x:auto}
+  .fact{background:var(--surface);border:1px solid var(--surface2);border-radius:var(--radius);padding:14px 18px;min-width:180px;text-align:center}
+  .fact .big{font-size:24px;font-weight:700}
+  .fact .big.red{color:var(--red)}
+  .fact .big.orange{color:var(--orange)}
+  .fact .big.green{color:var(--green)}
+  .fact .big.blue{color:var(--accent)}
+  .fact .sub{font-size:11.5px;color:var(--text-muted);margin-top:2px}
+
+  @media(max-width:600px){
+    .info-grid{grid-template-columns:1fr}
+    .card-grid{grid-template-columns:1fr 1fr}
+  }
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes bounce{to{transform:translateY(-5px);opacity:.4}}
 </style>
 </head>
 <body>
-<div class="app">
+<div class="shell">
   <header>
     <div class="logo">+</div>
-    <div>
-      <h1>ED Risk Chatbot</h1>
-      <div class="subtitle">Describe a patient. Get risk predictions and clinical recommendations.</div>
-    </div>
+    <div><h1>ED Risk Assessment</h1></div>
     <div class="status">
       <span class="dot" id="statusDot"></span>
       <span id="statusText">Connecting...</span>
     </div>
   </header>
 
-  <div class="messages" id="messages"></div>
-
-  <div class="suggestions" id="suggestions">
-    <button onclick="send('hello')">Get started</button>
-    <button onclick="send('72 year old male, temp 101, BP 135/85, pulse 110, pain 8/10, 3 chronic conditions')">Example patient</button>
-    <button onclick="send('What are the risk factors for ED revisits?')">Risk factors</button>
-    <button onclick="send('help')">Help</button>
+  <div class="tab-bar">
+    <button class="active" onclick="switchTab('chat')">Chat</button>
+    <button onclick="switchTab('stats')">Statistics &amp; Info</button>
   </div>
 
-  <div class="input-area">
-    <input type="text" id="input" placeholder="Describe a patient or ask a question..." autocomplete="off">
-    <button id="sendBtn" onclick="sendFromInput()">Send</button>
+  <!-- ════ CHAT TAB ════ -->
+  <div id="tab-chat" class="tab-content active">
+    <div class="messages" id="messages"></div>
+    <div class="suggestions" id="suggestions">
+      <button onclick="send('hello')">Get started</button>
+      <button onclick="send('72 year old male with COPD and CHF, temp 101, BP 135/85, pulse 110, pain 8/10')">Example patient</button>
+      <button onclick="send('What are the risk factors for ED revisits?')">Risk factors</button>
+      <button onclick="send('help')">Help</button>
+    </div>
+    <div class="input-area">
+      <input type="text" id="input" placeholder="Describe a patient or ask a question..." autocomplete="off">
+      <button id="sendBtn" onclick="sendFromInput()">Send</button>
+    </div>
+  </div>
+
+  <!-- ════ STATS TAB ════ -->
+  <div id="tab-stats" class="tab-content">
+    <div class="stats">
+
+      <h2>Understanding ED Readmissions</h2>
+      <p class="lead">Key statistics and risk factors for emergency department revisits and hospital readmissions — explained for everyone.</p>
+
+      <!-- Key numbers -->
+      <div class="card-grid">
+        <div class="card"><div class="num">130M+</div><div class="lbl">ED visits per year in the U.S.</div></div>
+        <div class="card"><div class="num">1 in 5</div><div class="lbl">patients return to the ED within 30 days</div></div>
+        <div class="card"><div class="num">$2.6B</div><div class="lbl">annual cost of preventable readmissions</div></div>
+        <div class="card"><div class="num">3.5%</div><div class="lbl">return within just 72 hours</div></div>
+      </div>
+
+      <h3>30-Day Readmission Rates by Condition</h3>
+      <p>Some chronic conditions carry much higher risk of a patient returning to the hospital within 30 days.</p>
+      <div class="bar-chart">
+        <div class="bar-row"><span class="bar-label">Heart Failure (CHF)</span><div class="bar-track"><div class="bar-fill red" style="width:50%">~25%</div></div></div>
+        <div class="bar-row"><span class="bar-label">COPD</span><div class="bar-track"><div class="bar-fill red" style="width:42%">~21%</div></div></div>
+        <div class="bar-row"><span class="bar-label">Pneumonia</span><div class="bar-track"><div class="bar-fill orange" style="width:36%">~18%</div></div></div>
+        <div class="bar-row"><span class="bar-label">Diabetes</span><div class="bar-track"><div class="bar-fill orange" style="width:30%">~15%</div></div></div>
+        <div class="bar-row"><span class="bar-label">Stroke</span><div class="bar-track"><div class="bar-fill yellow" style="width:28%">~14%</div></div></div>
+        <div class="bar-row"><span class="bar-label">Chronic Kidney Disease</span><div class="bar-track"><div class="bar-fill yellow" style="width:26%">~13%</div></div></div>
+        <div class="bar-row"><span class="bar-label">Asthma</span><div class="bar-track"><div class="bar-fill green" style="width:20%">~10%</div></div></div>
+        <div class="bar-row"><span class="bar-label">General population</span><div class="bar-track"><div class="bar-fill blue" style="width:14%">~7%</div></div></div>
+      </div>
+
+      <h3>What Makes Someone High-Risk?</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>Medical Factors</h4>
+          <ul>
+            <li>Multiple chronic conditions (3+)</li>
+            <li>Heart failure, COPD, kidney disease</li>
+            <li>Recent hospitalization</li>
+            <li>Abnormal vital signs at discharge</li>
+            <li>Taking 5+ medications</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>Social &amp; Access Factors</h4>
+          <ul>
+            <li>No primary care doctor</li>
+            <li>Lack of transportation</li>
+            <li>Housing instability</li>
+            <li>No insurance or underinsured</li>
+            <li>Language barriers</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>Behavioral Factors</h4>
+          <ul>
+            <li>Substance use disorder</li>
+            <li>Mental health conditions</li>
+            <li>Poor understanding of discharge instructions</li>
+            <li>Missed follow-up appointments</li>
+            <li>Medication non-adherence</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>Age-Related Factors</h4>
+          <ul>
+            <li>Adults 65+ have 2× readmission rates</li>
+            <li>Cognitive decline and dementia</li>
+            <li>Fall risk increases with age</li>
+            <li>Children under 5 also elevated risk</li>
+            <li>Polypharmacy in elderly</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>ED Visit Volume by Triage Severity</h3>
+      <p>The Emergency Severity Index (ESI) classifies patients from 1 (most critical) to 5 (least).</p>
+      <div class="bar-chart">
+        <div class="bar-row"><span class="bar-label">ESI 1 — Immediate</span><div class="bar-track"><div class="bar-fill red" style="width:3%">1–2%</div></div></div>
+        <div class="bar-row"><span class="bar-label">ESI 2 — Emergent</span><div class="bar-track"><div class="bar-fill orange" style="width:16%">~12%</div></div></div>
+        <div class="bar-row"><span class="bar-label">ESI 3 — Urgent</span><div class="bar-track"><div class="bar-fill yellow" style="width:52%">~38%</div></div></div>
+        <div class="bar-row"><span class="bar-label">ESI 4 — Semi-urgent</span><div class="bar-track"><div class="bar-fill green" style="width:44%">~32%</div></div></div>
+        <div class="bar-row"><span class="bar-label">ESI 5 — Non-urgent</span><div class="bar-track"><div class="bar-fill blue" style="width:22%">~16%</div></div></div>
+      </div>
+
+      <h3>Quick Facts</h3>
+      <div class="fact-strip">
+        <div class="fact"><div class="big red">25%</div><div class="sub">of CHF patients readmitted within 30 days</div></div>
+        <div class="fact"><div class="big orange">72 hrs</div><div class="sub">critical window for ED revisit risk</div></div>
+        <div class="fact"><div class="big green">40%</div><div class="sub">of readmissions are potentially preventable</div></div>
+        <div class="fact"><div class="big blue">48 hrs</div><div class="sub">recommended follow-up window for high-risk patients</div></div>
+      </div>
+
+      <h3>How This Tool Works</h3>
+      <p>This chatbot uses an <strong>XGBoost machine learning model</strong> trained on the
+      <strong>NHAMCS</strong> (National Hospital Ambulatory Medical Care Survey) dataset — a nationally
+      representative survey of U.S. emergency department visits.</p>
+      <p>When you describe a patient, the system:</p>
+      <div style="margin-left:16px;font-size:14px;line-height:1.7">
+        1. <strong>Extracts</strong> clinical values (age, vitals, conditions) from your description<br>
+        2. <strong>Infers</strong> likely triage acuity based on the conditions and vitals present<br>
+        3. <strong>Runs the model</strong> with evidence-based clinical risk adjustments<br>
+        4. <strong>Retrieves</strong> relevant recommendations from a curated knowledge base
+      </div>
+      <p style="margin-top:12px;color:var(--text-muted);font-size:13px">
+        <em>This tool is for educational and informational purposes only. It is not a substitute for professional medical judgment.</em>
+      </p>
+
+    </div>
   </div>
 </div>
 
 <script>
+/* ── Tab switching ── */
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelector(`.tab-bar button[onclick="switchTab('${id}')"]`).classList.add('active');
+  if (id === 'chat') inputEl.focus();
+}
+
+/* ── Markdown renderer ── */
+function renderMarkdown(text) {
+  let html = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = html.split('\n'), out = [];
+  let inTable = false, inList = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+
+    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+      const cells = line.split('|').filter((_,idx,arr) => idx > 0 && idx < arr.length-1);
+      if (cells.every(c => /^[\s\-:]+$/.test(c))) continue;
+      if (!inTable) { out.push('<table>'); inTable = true; }
+      const isHeader = !out.some(l => l.includes('<td>')) && inTable;
+      const tag = isHeader ? 'th' : 'td';
+      out.push('<tr>' + cells.map(c => `<${tag}>${c.trim()}</${tag}>`).join('') + '</tr>');
+      continue;
+    }
+    if (inTable) { out.push('</table>'); inTable = false; }
+
+    if (line.startsWith('### ')) { if (inList){out.push('</ul>');inList=false;} out.push('<h4>'+applyInline(line.slice(4))+'</h4>'); continue; }
+    if (line.startsWith('## '))  { if (inList){out.push('</ul>');inList=false;} out.push('<h4>'+applyInline(line.slice(3))+'</h4>'); continue; }
+    if (line.startsWith('# '))   { if (inList){out.push('</ul>');inList=false;} out.push('<h3>'+applyInline(line.slice(2))+'</h3>'); continue; }
+
+    if (/^-{3,}$/.test(line.trim())) { if (inList){out.push('</ul>');inList=false;} out.push('<hr>'); continue; }
+
+    if (/^\s*[-•]\s+/.test(line)) {
+      if (!inList) { out.push('<ul>'); inList = true; }
+      out.push('<li>'+applyInline(line.replace(/^\s*[-•]\s+/,''))+'</li>');
+      continue;
+    }
+    if (/^\s*\d+\.\s+/.test(line)) {
+      if (!inList) { out.push('<ul>'); inList = true; }
+      out.push('<li>'+applyInline(line.replace(/^\s*\d+\.\s+/,''))+'</li>');
+      continue;
+    }
+    if (inList) { out.push('</ul>'); inList = false; }
+
+    if (line.trim() === '') continue;
+    out.push('<p>'+applyInline(line)+'</p>');
+  }
+  if (inTable) out.push('</table>');
+  if (inList) out.push('</ul>');
+  return out.join('');
+}
+
+function applyInline(t) {
+  return t
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code>$1</code>');
+}
+
+/* ── Chat logic ── */
 const messagesEl = document.getElementById('messages');
 const inputEl = document.getElementById('input');
 const sendBtn = document.getElementById('sendBtn');
@@ -135,91 +368,47 @@ const statusDot = document.getElementById('statusDot');
 const statusText = document.getElementById('statusText');
 const suggestionsEl = document.getElementById('suggestions');
 
-let sessionId = null;
-let sending = false;
+let sessionId = null, sending = false;
 
 function addMessage(text, role) {
-  const wrap = document.createElement('div');
-  wrap.className = 'msg ' + role;
-  const avatar = document.createElement('div');
-  avatar.className = 'avatar';
-  avatar.textContent = role === 'bot' ? '+' : 'U';
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = text;
-  wrap.appendChild(avatar);
-  wrap.appendChild(bubble);
-  messagesEl.appendChild(wrap);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return wrap;
+  const wrap = document.createElement('div'); wrap.className = 'msg ' + role;
+  const avatar = document.createElement('div'); avatar.className = 'avatar'; avatar.textContent = role === 'bot' ? '+' : 'U';
+  const bubble = document.createElement('div'); bubble.className = 'bubble';
+  if (role === 'bot') bubble.innerHTML = renderMarkdown(text);
+  else bubble.textContent = text;
+  wrap.appendChild(avatar); wrap.appendChild(bubble);
+  messagesEl.appendChild(wrap); messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
 function addTyping() {
-  const wrap = document.createElement('div');
-  wrap.className = 'msg bot';
-  wrap.id = 'typing';
-  wrap.innerHTML = '<div class="avatar">+</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
-  messagesEl.appendChild(wrap);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+  const w = document.createElement('div'); w.className = 'msg bot'; w.id = 'typing';
+  w.innerHTML = '<div class="avatar">+</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  messagesEl.appendChild(w); messagesEl.scrollTop = messagesEl.scrollHeight;
 }
-
-function removeTyping() {
-  const el = document.getElementById('typing');
-  if (el) el.remove();
-}
+function removeTyping() { const e = document.getElementById('typing'); if (e) e.remove(); }
 
 async function send(text) {
   if (sending || !text.trim()) return;
-  sending = true;
-  sendBtn.disabled = true;
-  inputEl.value = '';
+  sending = true; sendBtn.disabled = true; inputEl.value = '';
   suggestionsEl.style.display = 'none';
-
-  addMessage(text, 'user');
-  addTyping();
-
+  switchTab('chat');
+  addMessage(text, 'user'); addTyping();
   try {
-    const res = await fetch('/chat', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({message: text, session_id: sessionId}),
-    });
-    const data = await res.json();
-    sessionId = data.session_id;
-    removeTyping();
-    addMessage(data.reply, 'bot');
-  } catch (e) {
-    removeTyping();
-    addMessage('Connection error. Is the server running?', 'bot');
-  }
-  sending = false;
-  sendBtn.disabled = false;
-  inputEl.focus();
+    const res = await fetch('/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message:text,session_id:sessionId}) });
+    const data = await res.json(); sessionId = data.session_id;
+    removeTyping(); addMessage(data.reply, 'bot');
+  } catch { removeTyping(); addMessage('Connection error. Is the server running?', 'bot'); }
+  sending = false; sendBtn.disabled = false; inputEl.focus();
 }
-
-function sendFromInput() {
-  send(inputEl.value);
-}
-
-inputEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter') sendFromInput();
-});
+function sendFromInput() { send(inputEl.value); }
+inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') sendFromInput(); });
 
 (async function checkHealth() {
   try {
-    const res = await fetch('/health');
-    const data = await res.json();
-    if (data.status === 'ok') {
-      statusDot.className = 'dot';
-      statusText.textContent = data.models_loaded.length + ' models loaded';
-    } else {
-      statusDot.className = 'dot offline';
-      statusText.textContent = 'Degraded';
-    }
-  } catch {
-    statusDot.className = 'dot offline';
-    statusText.textContent = 'Offline';
-  }
+    const r = await fetch('/health'), d = await r.json();
+    if (d.status === 'ok') { statusDot.className='dot'; statusText.textContent='Model loaded'; }
+    else { statusDot.className='dot offline'; statusText.textContent='Degraded'; }
+  } catch { statusDot.className='dot offline'; statusText.textContent='Offline'; }
 })();
 
 inputEl.focus();

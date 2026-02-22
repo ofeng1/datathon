@@ -16,6 +16,6 @@ def retrieve(index_path: str, query: str, top_k: int = 4):
         out.append({
             "score": float(sims[i]),
             "source": meta[i]["source"],
-            "excerpt": docs[i][:700],
+            "excerpt": docs[i],
         })
     return out
