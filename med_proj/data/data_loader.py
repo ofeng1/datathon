@@ -34,6 +34,10 @@ class DataLoader:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+        print(f"Loaded shape: {df.shape}")
+>>>>>>> Stashed changes
 =======
         print(f"Loaded shape: {df.shape}")
 >>>>>>> Stashed changes
