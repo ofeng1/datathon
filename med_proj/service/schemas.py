@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 
 class HealthResponse(BaseModel):
@@ -11,8 +11,14 @@ class HealthResponse(BaseModel):
 class ChatRequest(BaseModel):
     message: str
     session_id: Optional[str] = None
+    merge_state: Optional[Dict[str, Any]] = None
 
 
 class ChatResponse(BaseModel):
     session_id: str
     reply: str
+
+
+class ParseEdDocumentResponse(BaseModel):
+    parsed: Dict[str, Any]
+    summary: str

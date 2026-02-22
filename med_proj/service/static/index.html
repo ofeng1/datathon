@@ -107,6 +107,16 @@
   }
   .input-area button:hover{background:var(--accent-hover)}
   .input-area button:disabled{opacity:.5;cursor:not-allowed}
+  .input-area .add-pdf-btn{
+    width:40px;height:40px;padding:0;border-radius:var(--radius);
+    border:1px solid var(--surface2);background:var(--surface);
+    color:var(--text-muted);font-size:18px;font-weight:300;
+    cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--font);
+  }
+  .input-area .add-pdf-btn:hover{color:var(--accent);border-color:var(--accent)}
+  .input-area .add-pdf-btn:disabled{opacity:.5;cursor:not-allowed}
+  .input-area #pdfInput{display:none}
 
   .typing{display:flex;gap:4px;padding:4px 0}
   .typing span{width:5px;height:5px;border-radius:50%;background:var(--text-muted);animation:bounce .6s infinite alternate}
@@ -193,7 +203,6 @@
     <button onclick="switchTab('stats')">Statistics &amp; Info</button>
   </div>
 
-  <!-- ════ CHAT TAB ════ -->
   <div id="tab-chat" class="tab-content active">
     <div class="messages" id="messages"></div>
     <div class="suggestions" id="suggestions">
@@ -203,6 +212,8 @@
       <button onclick="send('help')">Help</button>
     </div>
     <div class="input-area">
+      <input type="file" id="pdfInput" accept=".pdf" title="Add PDF (ED form)">
+      <button type="button" class="add-pdf-btn" id="addPdfBtn" title="Add ED record PDF">+</button>
       <input type="text" id="input" placeholder="Describe a patient or ask a question..." autocomplete="off">
       <button id="sendBtn" onclick="sendFromInput()">Send</button>
     </div>
@@ -414,21 +425,61 @@ function addTyping() {
 }
 function removeTyping() { const e = document.getElementById('typing'); if (e) e.remove(); }
 
-async function send(text) {
+async function send(text, mergeState) {
   if (sending || !text.trim()) return;
   sending = true; sendBtn.disabled = true; inputEl.value = '';
+  if (document.getElementById('addPdfBtn')) document.getElementById('addPdfBtn').disabled = true;
   suggestionsEl.style.display = 'none';
   switchTab('chat');
   addMessage(text, 'user'); addTyping();
   try {
-    const res = await fetch('/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message:text,session_id:sessionId}) });
+    const body = { message: text, session_id: sessionId };
+    if (mergeState && Object.keys(mergeState).length) body.merge_state = mergeState;
+    const res = await fetch('/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
     const data = await res.json(); sessionId = data.session_id;
     removeTyping(); addMessage(data.reply, 'bot');
   } catch { removeTyping(); addMessage('Connection error. Is the server running?', 'bot'); }
-  sending = false; sendBtn.disabled = false; inputEl.focus();
+  sending = false; sendBtn.disabled = false;
+  if (document.getElementById('addPdfBtn')) document.getElementById('addPdfBtn').disabled = false;
+  inputEl.focus();
 }
 function sendFromInput() { send(inputEl.value); }
 inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') sendFromInput(); });
+
+/* ─── PDF upload (ED form) ─── */
+document.getElementById('addPdfBtn').addEventListener('click', () => document.getElementById('pdfInput').click());
+document.getElementById('pdfInput').addEventListener('change', async function(e) {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  if (!file.name.toLowerCase().endsWith('.pdf')) {
+    addMessage('Please select a PDF file only.', 'bot');
+    return;
+  }
+  switchTab('chat');
+  addTyping();
+  const addPdfBtn = document.getElementById('addPdfBtn');
+  if (addPdfBtn) addPdfBtn.disabled = true;
+  try {
+    const form = new FormData();
+    form.append('file', file);
+    const parseRes = await fetch('/parse-ed-document', { method: 'POST', body: form });
+    if (!parseRes.ok) {
+      const err = await parseRes.json().catch(() => ({ detail: parseRes.statusText }));
+      const msg = Array.isArray(err.detail) ? err.detail.map(d => d.msg || d).join(' ') : (err.detail || parseRes.statusText);
+      removeTyping();
+      addMessage('Upload failed: ' + msg, 'bot');
+      return;
+    }
+    const { parsed, summary } = await parseRes.json();
+    removeTyping();
+    send(summary, parsed);
+  } catch (err) {
+    removeTyping();
+    addMessage('Could not parse PDF. Check the file and try again.', 'bot');
+  }
+  if (addPdfBtn) addPdfBtn.disabled = false;
+});
 
 (async function checkHealth() {
   try {
