@@ -1,29 +1,40 @@
 import zipfile
 from pathlib import Path
-
 import pandas as pd
 
+
 class DataLoader:
+    def load_data(self, zip_filename: str):
+        """
+        Loads a .zip file located in med_proj/data/
+        Extracts it and returns the largest .sas7bdat file found.
+        """
 
-    def load_data(self, zip_path: str):
+        project_root = Path(".").resolve()
+        data_dir = project_root / "med_proj" / "data"
 
-        data_dir = Path(".").resolve()
-        zip_path = data_dir / zip_path
+        zip_path = data_dir / zip_filename
 
+        if not zip_path.exists():
+            raise FileNotFoundError(f"Zip file not found: {zip_path}")
+
+        # Extract into data_dir (not project root)
         with zipfile.ZipFile(zip_path, "r") as zf:
             zf.extractall(path=data_dir)
 
-        sas_path = data_dir / "ed2015-sas.sas7bdat"
+        # Find extracted SAS files inside data_dir
+        sas_files = list(data_dir.glob("*.sas7bdat"))
+
+        if not sas_files:
+            raise FileNotFoundError("No .sas7bdat found after extraction.")
+
+        # Pick the largest file (usually correct dataset)
+        sas_path = max(sas_files, key=lambda p: p.stat().st_size)
+
+        print(f"Reading SAS file: {sas_path}")
+
         df = pd.read_sas(sas_path)
 
-        return df
+        print(f"Loaded shape: {df.shape}")
 
-if __name__ == "__main__":
-    data_loader = DataLoader()
-    zip_paths = ["ed2015-sas.sas7bdat.zip", "ed2016_sas.zip", "ed2017_sas.zip", "ed2018_sas.zip",
-                 "ed2019_sas.zip", "ed2020_sas.zip", "ed2021_sas.zip"]
-    df = pd.DataFrame()
-    for zip_path in zip_paths:
-        df_temp = data_loader.load_data(zip_path)
-        df = pd.concat([df, df_temp])
-    print(df.shape)
+        return df
