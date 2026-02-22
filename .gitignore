@@ -12,6 +12,7 @@ build/
 .mypy_cache/
 .venv/
 venv/
+.venv/
 
 # macOS
 .DS_Store
@@ -19,3 +20,11 @@ venv/
 
 # Data / extracted files
 med_proj/data/*.sas7bdat
+med_proj/data/*.zip
+
+# Python
+__pycache__/
+*.pyc
+
+# Artifacts (rebuilt by pipeline)
+artifacts/
