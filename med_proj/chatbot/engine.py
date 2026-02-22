@@ -16,14 +16,12 @@ from med_proj.chatbot.intents import (
     classify,
 )
 from med_proj.chatbot.extractors import extract_all
-from med_proj.rag.retrieve import retrieve
+from med_proj.rag.retrieve import retrieve, rag_available
 
 
 ART_DIR = os.environ.get("ARTIFACT_DIR", "artifacts")
 _MODEL_KEY = "readmission"
 _MODEL_FILE = "readmission_model.json"
-
-RAG_INDEX_PATH = os.path.join(ART_DIR, "kb_index.joblib")
 
 _VITAL_LABELS = {
     "AGE": "Age",
@@ -199,10 +197,10 @@ class ChatEngine:
         return "Patient data cleared. Describe a new patient to begin."
 
     def _ask(self, message: str) -> str:
-        if not os.path.exists(RAG_INDEX_PATH):
+        if not rag_available(ART_DIR):
             return "Knowledge base not available. Run the training pipeline first."
 
-        hits = retrieve(RAG_INDEX_PATH, message, top_k=3)
+        hits = retrieve(ART_DIR, message, top_k=3)
         relevant = [h for h in hits if h["score"] > 0.05]
 
         if not relevant:
@@ -495,6 +493,19 @@ class ChatEngine:
             lines.append("")
             lines.append("**Detected Conditions (NLP):** " + ", ".join(canonical_conds))
 
+        # Fields from uploaded ED form (chief complaint, allergies, disposition, diagnosis)
+        form_labels = [
+            ("chief_complaint", "Chief complaint"),
+            ("allergies", "Allergies"),
+            ("disposition", "Disposition"),
+            ("diagnosis_notes", "Diagnosis"),
+        ]
+        for key, label in form_labels:
+            val = s.get(key)
+            if val and isinstance(val, str) and val.strip():
+                lines.append("")
+                lines.append(f"**{label}:** {val.strip()}")
+
         return "\n".join(lines)
 
     def _format_risk_scores(self, scores: dict) -> str:
@@ -554,7 +565,7 @@ class ChatEngine:
         return "[" + "█" * filled + "░" * (width - filled) + "]"
 
     def _rag_recommendations(self, scores: Dict[str, float]) -> str:
-        if not os.path.exists(RAG_INDEX_PATH):
+        if not rag_available(ART_DIR):
             return ""
 
         max_task = max(scores, key=scores.get) if scores else None
@@ -577,7 +588,7 @@ class ChatEngine:
             query_parts.append("severe pain")
 
         query = " ".join(query_parts)
-        hits = retrieve(RAG_INDEX_PATH, query, top_k=3)
+        hits = retrieve(ART_DIR, query, top_k=3)
         relevant = [h for h in hits if h["score"] > 0.03]
 
         if not relevant:

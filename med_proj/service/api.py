@@ -13,9 +13,9 @@ from med_proj.service.schemas import (
 )
 from med_proj.chatbot.engine import ChatEngine
 from med_proj.data.ed_form_parser import parse_ed_form_text, pdf_to_text
+from med_proj.rag.retrieve import rag_available
 
 ART_DIR = os.environ.get("ARTIFACT_DIR", "artifacts")
-RAG_INDEX_PATH = os.path.join(ART_DIR, "kb_index.joblib")
 STATS_PATH = os.path.join(ART_DIR, "stats.json")
 
 app = FastAPI(title="ED Revisit Risk API", version="1.0")
@@ -43,7 +43,7 @@ def health():
     return HealthResponse(
         status="ok" if _model_ok else "degraded",
         models_loaded=loaded,
-        rag_index_loaded=os.path.exists(RAG_INDEX_PATH),
+        rag_index_loaded=rag_available(ART_DIR),
     )
 
 
@@ -80,12 +80,18 @@ async def parse_ed_document(file: UploadFile = File(...)):
         parts.append(f"{int(parsed['AGE'])}yo")
     if parsed.get("SEX") is not None:
         parts.append("male" if parsed["SEX"] == 1.0 else "female")
+    if parsed.get("IMMEDR") is not None:
+        parts.append(f"ESI {int(parsed['IMMEDR'])}")
     if parsed.get("BPSYS") is not None and parsed.get("BPDIAS") is not None:
         parts.append(f"BP {int(parsed['BPSYS'])}/{int(parsed['BPDIAS'])}")
     if parsed.get("PULSE") is not None:
         parts.append(f"pulse {int(parsed['PULSE'])}")
     if parsed.get("TEMPF") is not None:
         parts.append(f"temp {parsed['TEMPF']}")
+    if parsed.get("chief_complaint") and isinstance(parsed["chief_complaint"], str):
+        cc = (parsed["chief_complaint"].strip() or "")[:80]
+        if cc:
+            parts.append("CC: " + (cc + "…" if len(parsed["chief_complaint"]) > 80 else cc))
     conds = [k for k, v in parsed.items() if v == 1.0 and k in (
         "COPD", "CHF", "CAD", "ASTHMA", "CKD", "HTN", "DIABTYP0", "DIABTYP1", "DIABTYP2",
         "CANCER", "DEPRN", "CEBVD", "SUBSTAB", "INJURY",

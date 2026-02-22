@@ -7,6 +7,7 @@ from med_proj.common.io import ensure_dir
 from med_proj.data.data_loader import DataLoader
 from med_proj.data.stats import build_stats_from_raw
 from med_proj.rag.index import build_index
+from med_proj.rag.ingest import run_ingest
 
 cfg = yaml.safe_load(open("config.yaml"))
 
@@ -21,9 +22,12 @@ with open(os.path.join(art_dir, "stats.json"), "w") as f:
     json.dump(stats, f, indent=2)
 print("Stats saved to", os.path.join(art_dir, "stats.json"))
 
-# Build RAG knowledge base index
+# Build RAG knowledge base index (TF-IDF fallback)
 kb_dir = cfg["rag"]["kb_dir"]
 build_index(kb_dir, os.path.join(art_dir, "kb_index.joblib"))
+
+# RapidFire-style ingestion: chunk + embed + FAISS (preferred by retrieve)
+run_ingest(kb_dir, os.path.join(art_dir, "rag_faiss"))
 
 print("\nDONE")
 print("Artifacts saved to:", art_dir)
