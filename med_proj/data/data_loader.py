@@ -5,6 +5,11 @@ import pandas as pd
 
 class DataLoader:
     def load_data(self, zip_filename: str):
+        """
+        Loads a .zip file located in med_proj/data/
+        Extracts it and returns the largest .sas7bdat file found.
+        """
+
         project_root = Path(".").resolve()
         data_dir = project_root / "med_proj" / "data"
 
@@ -30,24 +35,6 @@ class DataLoader:
 
         df = pd.read_sas(sas_path)
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
         print(f"Loaded shape: {df.shape}")
->>>>>>> Stashed changes
-=======
-        print(f"Loaded shape: {df.shape}")
->>>>>>> Stashed changes
-=======
-        print(f"Loaded shape: {df.shape}")
->>>>>>> Stashed changes
-=======
-        print(f"Loaded shape: {df.shape}")
->>>>>>> Stashed changes
-=======
-        print(f"Loaded shape: {df.shape}")
->>>>>>> Stashed changes
+
         return df
