@@ -1,21 +1,34 @@
 mode: sas_zip
 
-sas_zip:
+data:
   zip_filename: "ed2015-sas.sas7bdat.zip"
-  # Map your SAS columns -> standardized schema
-  mapping:
-    patient_id_col: "PATIENT_ID"
-    encounter_id_col: "VISIT_ID"
-    start_time_col: "ARRIVE_TS"
-    end_time_col: "DISCHARGE_TS"   # optional
-    # encounter_type_col: "ENC_TYPE" # optional; else defaults to "ed"
-    
-ed_revisit_hours: 72
-readmit_days: 30
+  base_dir: "."
+  extracted_search_root: "."
 
-# Modeling
-test_size: 0.2
-random_seed: 42
+# NHAMCS ED 2015 — synthetic IDs and dates are generated in the script
+mapping:
+  patient_id_col: "_PATIENT_ID"
+  encounter_id_col: "_ENCOUNTER_ID"
+  start_date_col: "_VISIT_DATE"
+  start_clock_col: "_ARRTIME_STR"
+  admitted_col: "ADMITHOS"
+  admitted_positive_values: [1, 1.0]
+
+nhamcs:
+  seen72_col: "SEEN72"
+  seen72_positive: [1, 1.0]
+  admithos_col: "ADMITHOS"
+  admithos_positive: [1, 1.0]
+
+labels:
+  revisit_hours: 72
+  revisit_days: 7
+  revisit_days_long: 30
+
+modeling:
+  random_seed: 42
+  test_size: 0.2
+  calibrate_method: "isotonic"
 
 # Paths (for csv mode)
 csv:
@@ -29,5 +42,8 @@ fhir:
   since_days: 180
 
 rag:
-  kb_dir: care_bounce/rag/knowledge_base
+  kb_dir: med_proj/rag/knowledge_base
   top_k: 4
+
+artifacts:
+  dir: artifacts

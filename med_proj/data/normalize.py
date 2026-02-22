@@ -6,7 +6,9 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timezone
 
-from med_proj.common.logging import get_loggerlog
+from med_proj.common.logging import get_logger
+
+log = get_logger("normalize")
 
 
 @dataclass

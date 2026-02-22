@@ -1,4 +1,10 @@
 from datetime import datetime, timezone
+from pathlib import Path
+
+def ensure_dir(path: str) -> Path:
+    p = Path(path)
+    p.mkdir(parents=True, exist_ok=True)
+    return p
 
 def parse_dt(s):
     if s is None:
