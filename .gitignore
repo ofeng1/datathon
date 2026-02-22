@@ -12,8 +12,6 @@ build/
 .mypy_cache/
 .venv/
 venv/
-.env
-.env.*
 
 # macOS
 .DS_Store
@@ -21,13 +19,3 @@ venv/
 
 # Data / extracted files
 med_proj/data/*.sas7bdat
-med_proj/data/*.zip
-artifacts/
-*.joblib
-
-# Logs
-*.log
-
-# IDE
-.vscode/
-.idea/
