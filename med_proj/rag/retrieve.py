@@ -1,7 +1,3 @@
-"""
-RAG retrieval: prefers FAISS index (RapidFire-style ingestion) when present,
-otherwise falls back to TF-IDF joblib index. Returns list of {score, source, excerpt}.
-"""
 import os
 from pathlib import Path
 
