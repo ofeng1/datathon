@@ -2,6 +2,7 @@
 
 ## ED Revisit Risk: a RAG-backed chatbot that estimates readmission risk and surfaces evidence-based recommendations from a clinical knowledge base.
 By: Cyrus Navasca, Shashin Gupta, Edric Irimpan, Owen Feng
+
 Developed for Data4Good 2026 Hackathon
 
 ---
