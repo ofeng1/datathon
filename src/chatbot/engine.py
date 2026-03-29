@@ -163,10 +163,9 @@ class ChatEngine:
 
     def _greeting(self) -> str:
         return (
-            "### Welcome\n"
-            "I'm the **ED Risk Assessment** assistant.\n\n"
-            "Describe a patient and I'll predict their **readmission risk** "
-            "and provide evidence-based recommendations.\n\n"
+            "**Welcome!** I'm the **ED Risk Assessment** assistant.\n\n"
+            "Describe a patient or submit a document and I'll assess their "
+            "**readmission risk** and provide evidence-based recommendations.\n\n"
             "**Example:** *72 year old male with COPD and CHF, "
             "temp 101.2, BP 135/85, pulse 110, pain 8/10*\n\n"
             "You can also ask clinical questions — "
