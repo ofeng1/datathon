@@ -42,7 +42,7 @@ fhir:
   since_days: 180
 
 rag:
-  kb_dir: med_proj/rag/knowledge_base
+  kb_dir: knowledge_base
   top_k: 4
 
 artifacts:

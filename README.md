@@ -31,7 +31,7 @@ config.yaml
      ▼  artifacts/  (stats.json, kb_index.joblib, rag_faiss/, readmission model)
      │
 ┌─────────────────────────────────────────────────────────────────┐
-│  RUNTIME: FastAPI service (med_proj/service/api.py)             │
+│  RUNTIME: FastAPI service (src/api/routes.py)                   │
 │  • Loads readmission model + stats at startup            │
 │  • /chat → ChatEngine (state, intent, extract, predict, RAG)     │
 │  • /parse-ed-document → PDF → parsed state for merge into chat   │
@@ -47,8 +47,8 @@ config.yaml
 ## Model and ingestion
 
 - **Data** — NHAMCS ED encounter data (e.g. SAS ZIP) is loaded from paths in `config.yaml`; the pipeline builds **stats** (regional and condition-level 72-hour revisit and admission percentages) and writes `artifacts/stats.json`.
-- **Readmission model** — An **XGBoost** classifier (trained separately by the modeling pipeline) is loaded from `artifacts/` at service startup. It predicts a base readmission probability from features (age, sex, vitals, conditions, triage, etc.); the chatbot then applies an **evidence-based clinical risk adjustment** (log-odds shifts for conditions, abnormal vitals, age, triage) to produce the final probability shown to the user.
-- **RAG knowledge base** — Markdown files under `med_proj/rag/knowledge_base/` are indexed in two ways:
+- **Readmission model** — An **XGBoost** classifier (trained separately by the modeling pipeline) is loaded from `artifacts/models/` at service startup. It predicts a base readmission probability from features (age, sex, vitals, conditions, triage, etc.); the chatbot then applies an **evidence-based clinical risk adjustment** (log-odds shifts for conditions, abnormal vitals, age, triage) to produce the final probability shown to the user.
+- **RAG knowledge base** — Markdown files under `knowledge_base/` are indexed in two ways:
   - **TF-IDF** (scikit-learn): document-level vectors → `artifacts/kb_index.joblib` (always built).
   - **FAISS** (optional): same docs are chunked (RecursiveCharacterTextSplitter), embedded with `sentence-transformers/all-MiniLM-L6-v2`, and stored as `artifacts/rag_faiss/`. Retrieval uses FAISS when present, otherwise falls back to TF-IDF.
 - **ED form parsing** — Uploaded PDFs are converted to text (pypdf); regex and NLP extractors fill structured state (age, sex, vitals, ESI/triage, conditions, chief complaint, allergies, disposition, diagnosis) and that state is merged into the chat session for the next assessment.
@@ -77,9 +77,9 @@ config.yaml
 ## Setup and run
 
 1. **Config** — Edit `config.yaml` for data paths, `rag.kb_dir`, and `artifacts.dir` (default `artifacts`).
-2. **Install** — `pip install -r requirements.txt` (optionally `numpy<2` and `sentence-transformers<3` if you hit dependency conflicts; see `med_proj/rag/ingest.py`).
-3. **Pipeline** — From repo root: `bash scripts/run_end_to_end.sh` to build stats and RAG indexes. The readmission model (e.g. `artifacts/readmission_model.json` or your trained artifact) must already exist in `artifacts/` for full risk predictions.
-4. **Run service** — `uvicorn med_proj.service.api:app --host 0.0.0.0 --port 8000`. Open `http://localhost:8000/` for the chat UI.
+2. **Install** — `pip install -r requirements.txt` (optionally `numpy<2` and `sentence-transformers<3` if you hit dependency conflicts; see `src/rag/ingest.py`).
+3. **Pipeline** — From repo root: `bash scripts/run_end_to_end.sh` to build stats and RAG indexes. The readmission model (e.g. `artifacts/models/readmission_model.json` or your trained artifact) must already exist in `artifacts/models/` for full risk predictions.
+4. **Run service** — `PYTHONPATH=src uvicorn api.routes:app --host 0.0.0.0 --port 8000`. Open `http://localhost:8000/` for the chat UI.
 
 ---
 
@@ -87,10 +87,11 @@ config.yaml
 
 - `config.yaml` — Data paths, RAG and artifacts config.
 - `scripts/run_end_to_end.sh` — Builds stats and RAG indexes.
-- `med_proj/rag/` — Index (TF-IDF), ingest (FAISS), retrieve (FAISS or TF-IDF).
-- `med_proj/chatbot/` — Engine (state, intent, extract, predict, format), intents, extractors.
-- `med_proj/data/` — Data loading, stats, ED form parser.
-- `med_proj/service/` — FastAPI app, schemas, static frontend.
-- `artifacts/` — stats.json, kb_index.joblib, rag_faiss/, and the readmission model (from training).
+- `src/rag/` — Index (TF-IDF), ingest (FAISS), retrieve (FAISS or TF-IDF).
+- `src/chatbot/` — Engine (state, intent, extract, predict, format), intents, extractors.
+- `src/data/` — Data loading, stats, ED form parser.
+- `src/api/` — FastAPI app and schemas.
+- `apps/web/static/` — Frontend static assets.
+- `artifacts/` — stats.json, kb_index.joblib, rag_faiss/, and model artifacts under `artifacts/models/`.
 
 For a deeper technical walkthrough, see **`docs/TECHNICAL_OVERVIEW.md`**.

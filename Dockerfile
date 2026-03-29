@@ -9,11 +9,14 @@ RUN apt-get update && \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY med_proj/ med_proj/
+COPY src/ src/
+COPY apps/ apps/
+COPY knowledge_base/ knowledge_base/
 COPY artifacts/ artifacts/
 COPY config.yaml .
 
 ENV ARTIFACT_DIR=artifacts
+ENV PYTHONPATH=/app/src
 ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
@@ -21,4 +24,4 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-CMD ["uvicorn", "med_proj.service.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "api.routes:app", "--host", "0.0.0.0", "--port", "8000"]

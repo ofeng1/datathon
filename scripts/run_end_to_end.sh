@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-python - <<'PY'
+PYTHONPATH=src python3 - <<'PY'
 import yaml, os, json
-from med_proj.common.io import ensure_dir
-from med_proj.data.data_loader import DataLoader
-from med_proj.data.stats import build_stats_from_raw
-from med_proj.rag.index import build_index
-from med_proj.rag.ingest import run_ingest
+from common.io import ensure_dir
+from data.data_loader import DataLoader
+from data.stats import build_stats_from_raw
+from rag.index import build_index
+from rag.ingest import run_ingest
 
 cfg = yaml.safe_load(open("config.yaml"))
 

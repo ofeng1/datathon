@@ -6,8 +6,8 @@ __pycache__
 *.pyc
 .DS_Store
 **/__MACOSX/
-med_proj/data/*.sas7bdat
-med_proj/data/*.zip
+data/raw/*.sas7bdat
+data/raw/*.zip
 scripts/
 *.md
 .dockerignore

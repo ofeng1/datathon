@@ -11,7 +11,6 @@ uvicorn==0.32.1
 pypdf==5.1.0
 python-multipart==0.0.17
 matplotlib==3.10.1
-xgboost==2.2.1
 
 # RAG document ingestion (RapidFire FiQA-style). Optional: pipeline still runs with TF-IDF if these fail.
 langchain>=0.3.0
