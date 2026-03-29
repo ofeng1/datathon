@@ -90,17 +90,36 @@
 
   .fullpage-panel-body.about-page{text-align:center}
   .fullpage-panel-body.about-page > p{max-width:640px;margin-left:auto;margin-right:auto}
-  .fullpage-panel-body.about-page h3{margin-top:0}
+  .about-page-title{
+    font-size:clamp(26px,5vw,36px);font-weight:800;letter-spacing:-.035em;line-height:1.15;
+    color:var(--text);margin:0 0 32px;padding:0;
+  }
   .about-team{
     display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;
-    gap:28px 36px;margin:0 0 28px;
+    gap:28px 36px;margin:0 0 32px;
   }
-  .about-team-member{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .about-team-member{display:flex;flex-direction:column;align-items:center;gap:0}
   .about-team-avatar{
-    width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center;
-    border:2px solid var(--surface2);flex-shrink:0;display:block;
+    width:140px;height:140px;border-radius:50%;object-fit:cover;object-position:center;
+    border:2px solid var(--surface2);flex-shrink:0;display:block;margin-bottom:12px;
   }
-  .about-team-name{font-size:13px;font-weight:600;color:var(--text)}
+  .about-team-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+  .about-team-socials{display:flex;align-items:center;justify-content:center;gap:12px}
+  .about-social-link{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:4px;border-radius:12px;border:none;background:transparent;
+    cursor:pointer;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease;
+    line-height:0;
+  }
+  .about-social-link img{width:36px;height:36px;display:block;object-fit:contain}
+  .about-social-link:hover{
+    transform:translateY(-2px) scale(1.06);
+    filter:brightness(1.12);
+    box-shadow:0 6px 20px rgba(0,0,0,.35);
+  }
+  .about-social-link:focus-visible{
+    outline:2px solid var(--accent);outline-offset:3px;
+  }
 
   .messages{
     flex:1;min-height:0;overflow-y:auto;padding:16px 20px;
@@ -509,28 +528,58 @@
 <div class="fullpage-panel" id="aboutFullpage" role="dialog" aria-modal="true" aria-labelledby="aboutFullpageTitle" aria-hidden="true">
   <div class="fullpage-shell">
     <div class="fullpage-panel-body about-page">
+      <h2 class="about-page-title" id="aboutFullpageTitle">About Acuity.ai</h2>
       <div class="about-team" role="list" aria-label="Team">
         <div class="about-team-member" role="listitem">
-          <img class="about-team-avatar" src="assets/cyrus_pfp.jpeg" width="96" height="96" alt="Cyrus Navasca">
-          <span class="about-team-name">Cyrus</span>
+          <img class="about-team-avatar" src="assets/cyrus_pfp.jpeg" width="140" height="140" alt="Cyrus Navasca">
+          <span class="about-team-name">Cyrus Navasca</span>
+          <div class="about-team-socials">
+            <a class="about-social-link" href="https://www.linkedin.com/in/cyrusnavasca/" target="_blank" rel="noopener noreferrer" aria-label="Cyrus Navasca on LinkedIn">
+              <img src="assets/linkedin.png" width="36" height="36" alt="">
+            </a>
+            <a class="about-social-link" href="https://github.com/cyrusnavasca" target="_blank" rel="noopener noreferrer" aria-label="Cyrus Navasca on GitHub">
+              <img src="assets/github_icon.png" width="36" height="36" alt="">
+            </a>
+          </div>
         </div>
         <div class="about-team-member" role="listitem">
-          <img class="about-team-avatar" src="assets/shashin_pfp.jpeg" width="96" height="96" alt="Shashin Gupta">
-          <span class="about-team-name">Shashin</span>
+          <img class="about-team-avatar" src="assets/shashin_pfp.jpeg" width="140" height="140" alt="Shashin Gupta">
+          <span class="about-team-name">Shashin Gupta</span>
+          <div class="about-team-socials">
+            <a class="about-social-link" href="https://www.linkedin.com/in/shashing/" target="_blank" rel="noopener noreferrer" aria-label="Shashin Gupta on LinkedIn">
+              <img src="assets/linkedin.png" width="36" height="36" alt="">
+            </a>
+            <a class="about-social-link" href="https://github.com/Shashin-Gupta" target="_blank" rel="noopener noreferrer" aria-label="Shashin Gupta on GitHub">
+              <img src="assets/github_icon.png" width="36" height="36" alt="">
+            </a>
+          </div>
         </div>
         <div class="about-team-member" role="listitem">
-          <img class="about-team-avatar" src="assets/owen_pfp.jpg" width="96" height="96" alt="Owen Feng">
-          <span class="about-team-name">Owen</span>
+          <img class="about-team-avatar" src="assets/owen_pfp.jpg" width="140" height="140" alt="Owen Feng">
+          <span class="about-team-name">Owen Feng</span>
+          <div class="about-team-socials">
+            <a class="about-social-link" href="https://www.linkedin.com/in/owenf3ng/" target="_blank" rel="noopener noreferrer" aria-label="Owen Feng on LinkedIn">
+              <img src="assets/linkedin.png" width="36" height="36" alt="">
+            </a>
+            <a class="about-social-link" href="https://github.com/ofeng1" target="_blank" rel="noopener noreferrer" aria-label="Owen Feng on GitHub">
+              <img src="assets/github_icon.png" width="36" height="36" alt="">
+            </a>
+          </div>
         </div>
         <div class="about-team-member" role="listitem">
-          <img class="about-team-avatar" src="assets/edric_pfp.jpeg" width="96" height="96" alt="Edric Irimpan">
-          <span class="about-team-name">Edric</span>
+          <img class="about-team-avatar" src="assets/edric_pfp.jpeg" width="140" height="140" alt="Edric Irimpan">
+          <span class="about-team-name">Edric Irimpan</span>
+          <div class="about-team-socials">
+            <a class="about-social-link" href="https://www.linkedin.com/in/edric-irimpan-491254293/" target="_blank" rel="noopener noreferrer" aria-label="Edric Irimpan on LinkedIn">
+              <img src="assets/linkedin.png" width="36" height="36" alt="">
+            </a>
+            <a class="about-social-link" href="https://github.com/TheFreshChef" target="_blank" rel="noopener noreferrer" aria-label="Edric Irimpan on GitHub">
+              <img src="assets/github_icon.png" width="36" height="36" alt="">
+            </a>
+          </div>
         </div>
       </div>
-      <h3 id="aboutFullpageTitle">About Acuity.ai</h3>
-      <p>This is placeholder copy for the About section. Acuity.ai supports clinical teams with ED readmission risk context grounded in NHAMCS-style survey data and a conversational assistant.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Acuity.ai is an AI/ML powered tool for medical providers to assess an Emergency Department patient&rsquo;s risk for readmission. This application was built in 72 hours for the Data4Good 2026 Hackathon, where it finished as a finalist in the &ldquo;Public Health &amp; Wellbeing&rdquo; category.</p>
     </div>
   </div>
 </div>
