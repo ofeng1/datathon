@@ -26,7 +26,7 @@ The recommendation below separates **source code**, **runtime artifacts**, **raw
 │   └── cli/                     # CLI entrypoints
 ├── apps/
 │   └── web/
-│       └── static/              # index.html, logo.jpg, frontend assets
+│       └── static/              # index.html, assets/ (logo.jpg, etc.), frontend files
 ├── data/
 │   ├── raw/                     # NHAMCS zips, immutable input files
 │   ├── interim/                 # temporary transformed files
@@ -72,7 +72,7 @@ The recommendation below separates **source code**, **runtime artifacts**, **raw
 | Current path | Recommended path | Notes |
 |---|---|---|
 | `med_proj/service/static/index.html` | `apps/web/static/index.html` | Decouple frontend from backend package |
-| `med_proj/service/static/logo.jpg` | `apps/web/static/logo.jpg` | Same as above |
+| `med_proj/service/static/logo.jpg` | `apps/web/static/assets/logo.jpg` | Same as above |
 
 ### RAG content and docs
 
