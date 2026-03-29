@@ -6,9 +6,9 @@ import json
 import os
 from typing import Any, Dict, List
 
+import joblib
 import numpy as np
 import pandas as pd
-import xgboost as xgb
 
 from chatbot.intents import (
     INTENT_ASSESS, INTENT_ASK, INTENT_GREETING,
@@ -21,7 +21,7 @@ from rag.retrieve import retrieve, rag_available
 
 ART_DIR = os.environ.get("ARTIFACT_DIR", "artifacts")
 _MODEL_KEY = "readmission"
-_MODEL_FILE = "models/readmission_model.json"
+_ENSEMBLE_FILE = "models/ensemble.joblib"
 
 _VITAL_LABELS = {
     "AGE": "Age",
@@ -130,10 +130,9 @@ class ChatEngine:
         self._load_stats()
 
     def _load_models(self) -> None:
-        path = os.path.join(ART_DIR, _MODEL_FILE)
-        m = xgb.XGBClassifier(enable_categorical=True)
-        m.load_model(path)
-        self.models[_MODEL_KEY] = m
+        path = os.path.join(ART_DIR, _ENSEMBLE_FILE)
+        bundle = joblib.load(path)
+        self.models[_MODEL_KEY] = bundle
 
     def _load_stats(self) -> None:
         path = os.path.join(ART_DIR, "stats.json")
@@ -302,8 +301,8 @@ class ChatEngine:
     # ---- Prediction ----
 
     def _build_feature_row(self) -> pd.DataFrame:
-        clf = self.models[_MODEL_KEY]
-        feat_names = clf.get_booster().feature_names or []
+        bundle = self.models[_MODEL_KEY]
+        feat_names = bundle["feature_names"]
         row = {f: np.nan for f in feat_names}
 
         for k, v in self.state.items():
@@ -315,16 +314,24 @@ class ChatEngine:
         return df
 
     def _run_predictions(self) -> dict:
-        clf = self.models[_MODEL_KEY]
+        bundle = self.models[_MODEL_KEY]
         df = self._build_feature_row()
 
-        booster = clf.get_booster()
-        feat_names = booster.feature_names
-        df = df.reindex(columns=feat_names)
+        rf = bundle["rf"]
+        lgbm = bundle["lgbm"]
+        logreg = bundle["logreg"]
+        scaler = bundle["scaler"]
+        meta_model = bundle["meta_model"]
 
         X_np = df.to_numpy(dtype=np.float32, copy=True)
-        dm = xgb.DMatrix(X_np, feature_names=feat_names)
-        base_prob = float(booster.predict(dm)[0])
+        X_scaled = scaler.transform(X_np)
+
+        p_rf = rf.predict_proba(X_np)[:, 1]
+        p_lgb = lgbm.predict_proba(X_np)[:, 1]
+        p_lr = logreg.predict_proba(X_scaled)[:, 1]
+
+        meta_X = np.column_stack([p_lr, p_rf, p_lgb])
+        base_prob = float(meta_model.predict_proba(meta_X)[0, 1])
 
         prob = self._clinical_risk_adjustment(base_prob)
         return {"readmission": prob}
@@ -332,7 +339,7 @@ class ChatEngine:
     def _clinical_risk_adjustment(self, base_prob: float) -> float:
         """Adjust the model baseline using evidence-based risk factors.
 
-        The XGBoost model relies heavily on categorical features (diagnosis
+        The ensemble model relies heavily on categorical features (diagnosis
         codes, drug IDs) that aren't available from free-text input.  This
         layer uses published readmission-rate literature to shift the
         probability when specific conditions or abnormal vitals are present.
