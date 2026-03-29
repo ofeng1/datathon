@@ -17,6 +17,8 @@ venv/
 **/__MACOSX/
 data/raw/*.sas7bdat
 data/raw/*.zip
+data/processed/*.pkl
+
 __pycache__/
 *.pyc
 artifacts/
