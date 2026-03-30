@@ -47,7 +47,7 @@ config.yaml
 ## Model and ingestion
 
 - **Data** — NHAMCS ED encounter data (e.g. SAS ZIP) is loaded from paths in `config.yaml`; the pipeline builds **stats** (regional and condition-level 72-hour revisit and admission percentages) and writes `artifacts/stats.json`.
-- **Readmission model** — An **XGBoost** classifier (trained separately by the modeling pipeline) is loaded from `artifacts/models/` at service startup. It predicts a base readmission probability from features (age, sex, vitals, conditions, triage, etc.); the chatbot then applies an **evidence-based clinical risk adjustment** (log-odds shifts for conditions, abnormal vitals, age, triage) to produce the final probability shown to the user.
+- **Readmission model** — A **stacked ensemble** (RandomForest + LightGBM + logistic regression with a meta-classifier), trained by `scripts/run_training.py`, is saved as `artifacts/models/ensemble.joblib` and loaded at startup. It uses seven NHAMCS-aligned numeric features (e.g. LOV, wait time, triage, age, pain, chronic and diagnosis counts). At chat inference, missing features are imputed using training-set medians bundled with the model; the chatbot then applies an **evidence-based clinical risk adjustment** (log-odds shifts for conditions, abnormal vitals, age, triage) to produce the final probability shown to the user.
 - **RAG knowledge base** — Markdown files under `knowledge_base/` are indexed in two ways:
   - **TF-IDF** (scikit-learn): document-level vectors → `artifacts/kb_index.joblib` (always built).
   - **FAISS** (optional): same docs are chunked (RecursiveCharacterTextSplitter), embedded with `sentence-transformers/all-MiniLM-L6-v2`, and stored as `artifacts/rag_faiss/`. Retrieval uses FAISS when present, otherwise falls back to TF-IDF.
@@ -58,7 +58,7 @@ config.yaml
 ## RAG and chatbot
 
 - **RAG** does not generate text; it **retrieves** top-k passages from the knowledge base. The chatbot uses it for: (1) **Ask** — user’s question as query → “Knowledge Base Results”; (2) **Recommendations** — after an assessment, a synthetic query (risk level + conditions, e.g. “high risk readmission recommendations CHF elderly”) → “Recommendations” section.
-- **Chatbot** — Per-session state (vitals, conditions, optional form fields). Each message is **intent-classified** (greeting, help, reset, ask, update, assess). For assess/update: **extractors** pull clinical values from text (or use merged PDF state), **infer** missing triage from conditions/vitals, **predict** with XGBoost + adjustment, then **assemble** reply: Patient Summary, risk score, RAG recommendations, and condition-level stats from `stats.json`.
+- **Chatbot** — Per-session state (vitals, conditions, optional form fields). Each message is **intent-classified** (greeting, help, reset, ask, update, assess). For assess/update: **extractors** pull clinical values from text (or use merged PDF state), **infer** missing triage from conditions/vitals, **predict** with the ensemble + adjustment, then **assemble** reply: Patient Summary, risk score, RAG recommendations, and condition-level stats from `stats.json`.
 
 ---
 
@@ -68,7 +68,7 @@ config.yaml
 |----------|-------------|
 | `GET /` | Redirects to `/static/index.html` (single-page app). |
 | `GET /health` | `{ status, models_loaded, rag_index_loaded }`. |
-| `POST /chat` | Body: `{ message, session_id?, merge_state? }`. Returns `{ session_id, reply }` (markdown). |
+| `POST /chat` | Body: `{ message, session_id?, merge_state? }`. Returns `{ session_id, reply, error? }` (markdown `reply`; on engine failure, HTTP 200 with a user-safe `reply` and optional `error` detail). |
 | `POST /parse-ed-document` | Upload PDF; returns `{ parsed, summary }` for use with `/chat` and `merge_state`. |
 | `GET /stats` | Precomputed stats JSON for the Stats tab. |
 
@@ -78,7 +78,7 @@ config.yaml
 
 1. **Config** — Edit `config.yaml` for data paths, `rag.kb_dir`, and `artifacts.dir` (default `artifacts`).
 2. **Install** — `pip install -r requirements.txt` (optionally `numpy<2` and `sentence-transformers<3` if you hit dependency conflicts; see `src/rag/ingest.py`).
-3. **Pipeline** — From repo root: `bash scripts/run_end_to_end.sh` to build stats and RAG indexes. The readmission model (e.g. `artifacts/models/readmission_model.json` or your trained artifact) must already exist in `artifacts/models/` for full risk predictions.
+3. **Pipeline** — From repo root: `bash scripts/run_end_to_end.sh` to build stats and RAG indexes. Train the readmission ensemble with `PYTHONPATH=src python scripts/run_training.py` (writes `artifacts/models/ensemble.joblib` and `readmission_model.json`) after you have `data/processed/merged_ed_dataframe.pkl`.
 4. **Run service** — `PYTHONPATH=src uvicorn api.routes:app --host 0.0.0.0 --port 8000`. Open `http://localhost:8000/` for the chat UI.
 
 ---

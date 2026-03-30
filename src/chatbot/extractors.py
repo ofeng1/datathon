@@ -201,6 +201,38 @@ def extract_arrtime(text: str) -> Dict[str, Any]:
     return {}
 
 
+def extract_wait_time(text: str) -> Dict[str, Any]:
+    m = re.search(
+        r"\b(?:wait\s*time|waiting|door[\s-]*to[\s-]*doctor)\s*[:=]?\s*([\d.]+)\s*(?:min|minutes?|m\b)",
+        text,
+        re.I,
+    )
+    if m:
+        v = _float(m.group(1))
+        if v is not None:
+            return {"WAITTIME": v}
+    m = re.search(r"\bwait(?:ed|ing)?\s+([\d.]+)\s*(?:min|minutes?)\b", text, re.I)
+    if m:
+        v = _float(m.group(1))
+        if v is not None:
+            return {"WAITTIME": v}
+    return {}
+
+
+def extract_totdiag(text: str) -> Dict[str, Any]:
+    m = re.search(
+        r"\b(?:totdiag|total\s*diagnos(?:is|es))\s*[:=]?\s*(\d+)\b",
+        text,
+        re.I,
+    )
+    if m:
+        return {"TOTDIAG": _float(m.group(1))}
+    m = re.search(r"\b(\d+)\s*(?:diagnos(?:is|es)|dx(?:\s*count)?)\b", text, re.I)
+    if m:
+        return {"TOTDIAG": _float(m.group(1))}
+    return {}
+
+
 def extract_lov(text: str) -> Dict[str, Any]:
     m = re.search(r'\b(?:lov|length of visit|been here|here for)\s*[:=]?\s*([\d.]+)\s*(hr|hour|h|min|minute|m)\w*', text, re.I)
     if m:
@@ -307,6 +339,8 @@ _ALL_EXTRACTORS = [
     extract_vitals,
     extract_pain,
     extract_arrtime,
+    extract_wait_time,
+    extract_totdiag,
     extract_lov,
     extract_chronic,
     extract_injury,

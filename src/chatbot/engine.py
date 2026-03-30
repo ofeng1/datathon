@@ -14,14 +14,35 @@ from chatbot.intents import (
     INTENT_ASSESS, INTENT_ASK, INTENT_GREETING,
     INTENT_HELP, INTENT_RESET, INTENT_UPDATE,
     classify,
+    prefer_knowledge_base_route,
 )
 from chatbot.extractors import extract_all
+from chatbot.llm_client import complete as llm_complete, llm_configured
+from chatbot.llm_prompts import (
+    DISCLAIMER,
+    assess_system_prompt,
+    assess_user_prompt,
+    ask_system_prompt,
+    ask_user_prompt,
+)
 from rag.retrieve import retrieve, rag_available
 
 
 ART_DIR = os.environ.get("ARTIFACT_DIR", "artifacts")
 _MODEL_KEY = "readmission"
 _ENSEMBLE_FILE = "models/ensemble.joblib"
+
+# Training-set medians (NHAMCS ED, merged + filter_nonnegative + row dropna).
+# Used when ensemble.joblib has no ``impute_values`` (legacy bundle).
+_DEFAULT_IMPUTE_READMISSION = {
+    "LOV": 163.0,
+    "WAITTIME": 12.0,
+    "IMMEDR": 3.0,
+    "AGE": 38.0,
+    "PAINSCALE": 5.0,
+    "TOTCHRON": 1.0,
+    "TOTDIAG": 2.0,
+}
 
 _VITAL_LABELS = {
     "AGE": "Age",
@@ -208,17 +229,38 @@ class ChatEngine:
                 "discharge planning, chronic conditions, or triage acuity."
             )
 
+        template = self._ask_template_reply(relevant)
+        if llm_configured():
+            passages = [
+                {
+                    "source": h.get("source", "unknown"),
+                    "excerpt": _clean_excerpt(h["excerpt"], max_chars=1500),
+                }
+                for h in relevant
+            ]
+            synthesized = llm_complete(
+                ask_system_prompt(),
+                ask_user_prompt(message, passages),
+            )
+            if synthesized:
+                return f"{synthesized}\n\n---\n\n{DISCLAIMER}"
+
+        return template
+
+    @staticmethod
+    def _ask_template_reply(relevant: List[dict]) -> str:
         parts = ["### Knowledge Base Results\n"]
         for h in relevant:
             excerpt = _clean_excerpt(h["excerpt"], max_chars=1500)
             parts.append(excerpt)
             parts.append("")
-
         return "\n".join(parts)
 
     def _assess(self, message: str) -> str:
         extracted = extract_all(message)
         if not extracted and not self.state:
+            if prefer_knowledge_base_route(message):
+                return self._ask(message)
             return (
                 "I couldn't extract any clinical values from that. "
                 "Try something like: *65 year old male with COPD, temp 101, "
@@ -232,7 +274,20 @@ class ChatEngine:
             return "No models loaded. Run the training pipeline first."
 
         scores = self._run_predictions()
+        template = self._assess_template_reply(scores)
 
+        if llm_configured():
+            ctx = self._assess_llm_context(scores)
+            synthesized = llm_complete(
+                assess_system_prompt(),
+                assess_user_prompt(ctx),
+            )
+            if synthesized:
+                return f"{synthesized}\n\n---\n\n{DISCLAIMER}"
+
+        return template
+
+    def _assess_template_reply(self, scores: Dict[str, float]) -> str:
         parts: List[str] = []
         parts.append(self._format_patient_summary())
         parts.append("")
@@ -255,6 +310,47 @@ class ChatEngine:
         )
 
         return "\n".join(parts)
+
+    def _assess_llm_context(self, scores: Dict[str, float]) -> Dict[str, Any]:
+        prob = float(scores.get("readmission", 0.0))
+        pct = prob * 100.0
+        if pct >= 30:
+            band, label = "high", "High"
+        elif pct >= 15:
+            band, label = "moderate", "Moderate"
+        else:
+            band, label = "low", "Low"
+
+        hits = self._rag_recommendation_hits(scores)
+        passages = [
+            {
+                "source": h.get("source", "unknown"),
+                "score": float(h.get("score", 0.0)),
+                "excerpt": _clean_excerpt(h["excerpt"], max_chars=1200),
+            }
+            for h in hits
+        ]
+        condition_risk = self._format_condition_risk_section()
+
+        return {
+            "readmission_probability": prob,
+            "readmission_percent_display": round(pct, 1),
+            "risk_band": band,
+            "risk_label": label,
+            "patient_summary_markdown": self._format_patient_summary(),
+            "risk_section_markdown": self._format_risk_scores(scores),
+            "condition_risk_markdown": condition_risk or None,
+            "recommendation_passages": passages,
+            "patient_state": self._state_for_llm(),
+        }
+
+    def _state_for_llm(self) -> Dict[str, Any]:
+        out: Dict[str, Any] = {}
+        for k, v in self.state.items():
+            if isinstance(k, str) and k.startswith("_"):
+                continue
+            out[str(k)] = v
+        return out
 
     # ---- Clinical inference ----
 
@@ -312,9 +408,25 @@ class ChatEngine:
         df = df.replace([-9, -8, -7], np.nan)
         return df
 
+    def _impute_feature_row(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Fill NaNs so tree/LR models never see missing values at inference."""
+        bundle = self.models[_MODEL_KEY]
+        imp = bundle.get("impute_values") or {}
+        feat_names: List[str] = bundle["feature_names"]
+        out = df.copy()
+        for col in feat_names:
+            if col not in out.columns:
+                continue
+            if bool(out[col].isna().any()):
+                fill = imp.get(col)
+                if fill is None:
+                    fill = _DEFAULT_IMPUTE_READMISSION.get(col, 0.0)
+                out[col] = out[col].fillna(fill)
+        return out
+
     def _run_predictions(self) -> dict:
         bundle = self.models[_MODEL_KEY]
-        df = self._build_feature_row()
+        df = self._impute_feature_row(self._build_feature_row())
 
         rf = bundle["rf"]
         lgbm = bundle["lgbm"]
@@ -322,11 +434,10 @@ class ChatEngine:
         scaler = bundle["scaler"]
         meta_model = bundle["meta_model"]
 
-        X_np = df.to_numpy(dtype=np.float32, copy=True)
-        X_scaled = scaler.transform(X_np)
+        X_scaled = scaler.transform(df)
 
-        p_rf = rf.predict_proba(X_np)[:, 1]
-        p_lgb = lgbm.predict_proba(X_np)[:, 1]
+        p_rf = rf.predict_proba(df)[:, 1]
+        p_lgb = lgbm.predict_proba(df)[:, 1]
         p_lr = logreg.predict_proba(X_scaled)[:, 1]
 
         meta_X = np.column_stack([p_lr, p_rf, p_lgb])
@@ -570,13 +681,13 @@ class ChatEngine:
         filled = int(round(prob * width))
         return "[" + "█" * filled + "░" * (width - filled) + "]"
 
-    def _rag_recommendations(self, scores: Dict[str, float]) -> str:
+    def _rag_recommendation_hits(self, scores: Dict[str, float]) -> List[dict]:
         if not rag_available(ART_DIR):
-            return ""
+            return []
 
         max_task = max(scores, key=scores.get) if scores else None
         if max_task is None:
-            return ""
+            return []
 
         prob = scores[max_task]
         risk = "high" if prob > 0.3 else "moderate" if prob > 0.15 else "low"
@@ -595,8 +706,10 @@ class ChatEngine:
 
         query = " ".join(query_parts)
         hits = retrieve(ART_DIR, query, top_k=3)
-        relevant = [h for h in hits if h["score"] > 0.03]
+        return [h for h in hits if h["score"] > 0.03]
 
+    def _rag_recommendations(self, scores: Dict[str, float]) -> str:
+        relevant = self._rag_recommendation_hits(scores)
         if not relevant:
             return ""
 

@@ -6,6 +6,7 @@ class HealthResponse(BaseModel):
     status: str
     models_loaded: List[str]
     rag_index_loaded: bool
+    llm_configured: bool = False
 
 
 class ChatRequest(BaseModel):
@@ -17,6 +18,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     session_id: str
     reply: str
+    error: Optional[str] = None
 
 
 class ParseEdDocumentResponse(BaseModel):

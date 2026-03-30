@@ -773,9 +773,37 @@ async function send(text, mergeState) {
     const body = { message: text, session_id: sessionId };
     if (mergeState && Object.keys(mergeState).length) body.merge_state = mergeState;
     const res = await fetch('/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
-    const data = await res.json(); sessionId = data.session_id;
-    removeTyping(); addMessage(data.reply, 'bot');
-  } catch { removeTyping(); addMessage('Connection error. Is the server running?', 'bot'); }
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      removeTyping();
+      addMessage('The server returned a non-JSON response. Check server logs or try again.', 'bot');
+      sending = false; sendBtn.disabled = false;
+      if (document.getElementById('addPdfBtn')) document.getElementById('addPdfBtn').disabled = false;
+      inputEl.focus();
+      return;
+    }
+    if (data.session_id) sessionId = data.session_id;
+    removeTyping();
+    if (!res.ok) {
+      let msg = res.statusText || 'Request failed';
+      if (data.detail !== undefined) {
+        msg = Array.isArray(data.detail)
+          ? data.detail.map(function(d) { return (d && d.msg) ? d.msg : String(d); }).join(' ')
+          : String(data.detail);
+      } else if (typeof data.reply === 'string' && data.reply.length) {
+        msg = data.reply;
+      }
+      addMessage(msg, 'bot');
+    } else {
+      const reply = typeof data.reply === 'string' ? data.reply : 'No reply from the server.';
+      addMessage(reply, 'bot');
+    }
+  } catch {
+    removeTyping();
+    addMessage('Could not reach the server. Check that the API is running (e.g. uvicorn on port 8000).', 'bot');
+  }
   sending = false; sendBtn.disabled = false;
   if (document.getElementById('addPdfBtn')) document.getElementById('addPdfBtn').disabled = false;
   inputEl.focus();

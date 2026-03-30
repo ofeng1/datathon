@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
-from typing import List, Optional, Tuple
+from dataclasses import dataclass
+from typing import List, Set, Tuple
 
 INTENT_GREETING = "greeting"
 INTENT_ASSESS = "assess"
@@ -12,6 +12,50 @@ INTENT_UPDATE = "update"
 INTENT_ASK = "ask"
 INTENT_HELP = "help"
 INTENT_RESET = "reset"
+
+# Prediction / readmission phrasing (not e.g. "risk factors" FAQ).
+_READMISSION_RISK_CUE = re.compile(
+    r"\breadmission\s+risk\b|"
+    r"\brisk\s+of\s+readmission\b|"
+    r"\brisk\s+score\b|"
+    r"\brisk\s+assessment\b",
+    re.I,
+)
+
+_QUESTION_LEAD = re.compile(
+    r"^(?:what|why|how|when|who|tell me|explain|describe)\b",
+    re.I,
+)
+
+
+def _strong_patient_cues(msg: str) -> bool:
+    if re.search(r"\d+\s*(?:yr|year|yo|y/?o)\b", msg, re.I):
+        return True
+    if re.search(r"\b\d{2,3}\s*/\s*\d{2,3}\b", msg):
+        return True
+    if re.search(
+        r"\b(?:temp|temperature)\b.*\d|\d.*\b(?:temp|temperature)\b", msg, re.I
+    ):
+        return True
+    if re.search(r"\bpulse\b.*\d|\d.*\bpulse\b", msg, re.I):
+        return True
+    if re.search(r"\bpain\b.*\d\s*/\s*\d|\b\d\s*/\s*10\b", msg, re.I):
+        return True
+    return False
+
+
+def prefer_knowledge_base_route(message: str) -> bool:
+    """True when the message should use KB/RAG rather than patient extraction if ambiguous."""
+    msg = message.strip()
+    if not msg:
+        return False
+    if _READMISSION_RISK_CUE.search(msg):
+        return False
+    if not _QUESTION_LEAD.search(msg):
+        return False
+    if _strong_patient_cues(msg):
+        return False
+    return True
 
 
 @dataclass
@@ -69,7 +113,11 @@ _RULES: List[_IntentRule] = [
             r"\b(patient|pt)\b",
             r"\b(male|female)\b",
             r"\b(age|temp|pulse|bp|pain|lov|chronic|arriv|triage)\b",
-            r"\b(assess|predict|evaluate|risk|score)\b",
+            r"\b(assess|predict|evaluate)\b",
+            r"\breadmission\s+risk\b",
+            r"\brisk\s+of\s+readmission\b",
+            r"\brisk\s+score\b",
+            r"\brisk\s+assessment\b",
         ]],
         priority=40,
     ),
@@ -83,14 +131,25 @@ def classify(message: str) -> str:
         return INTENT_HELP
 
     hits: List[Tuple[int, str]] = []
+    matched_names: Set[str] = set()
     for rule in _RULES:
         for pat in rule.patterns:
             if pat.search(msg):
                 hits.append((rule.priority, rule.name))
+                matched_names.add(rule.name)
                 break
 
     if not hits:
         return INTENT_ASK
 
     hits.sort(key=lambda t: -t[0])
-    return hits[0][1]
+    winner = hits[0][1]
+
+    if (
+        winner == INTENT_ASSESS
+        and INTENT_ASK in matched_names
+        and prefer_knowledge_base_route(msg)
+    ):
+        return INTENT_ASK
+
+    return winner

@@ -2,10 +2,10 @@
 Train an ensemble (RandomForest + LightGBM + LogisticRegression → stacked meta-model)
 on the cleaned NHAMCS ED dataframe and write a model artifact JSON.
 
-Usage (from repo root, with PYTHONPATH=src):
-    python -m modeling.train_ensemble
+Usage (from repo root):
+    PYTHONPATH=src python scripts/run_training.py
 
-Or import and call `run()` directly.
+Or import ``run`` from ``modeling.training`` with ``src`` on ``PYTHONPATH``.
 """
 
 from __future__ import annotations
@@ -151,8 +151,12 @@ def train_meta_model(
     rf: RandomForestClassifier,
     lgbm,
     logreg: LogisticRegression,
-) -> LogisticRegression:
-    """5-fold stacking: generate OOF predictions → fit meta LogisticRegression."""
+) -> tuple[LogisticRegression, StandardScaler]:
+    """5-fold stacking: generate OOF predictions → fit meta LogisticRegression.
+
+    LogisticRegression base model is always fit on **scaled** features (per-fold scaler
+    for OOF; production scaler fit on full *X*), matching inference in ChatEngine.
+    """
     kf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True, random_state=RANDOM_STATE)
 
     oof_rf = np.zeros(len(X))
@@ -169,25 +173,30 @@ def train_meta_model(
         rf_clone = clone(rf)
         lgb_clone = clone(lgbm)
         logreg_clone = clone(logreg)
+        scaler_fold = StandardScaler()
 
         rf_clone.fit(X_fold_train, y_fold_train)
         lgb_clone.fit(X_fold_train, y_fold_train)
-        logreg_clone.fit(X_fold_train, y_fold_train)
+        X_tr_s = scaler_fold.fit_transform(X_fold_train)
+        X_val_s = scaler_fold.transform(X_fold_val)
+        logreg_clone.fit(X_tr_s, y_fold_train)
 
         oof_rf[val_idx] = rf_clone.predict_proba(X_fold_val)[:, 1]
         oof_lgb[val_idx] = lgb_clone.predict_proba(X_fold_val)[:, 1]
-        oof_logreg[val_idx] = logreg_clone.predict_proba(X_fold_val)[:, 1]
+        oof_logreg[val_idx] = logreg_clone.predict_proba(X_val_s)[:, 1]
 
     meta_X = np.column_stack([oof_logreg, oof_rf, oof_lgb])
     meta_model = LogisticRegression()
     meta_model.fit(meta_X, y)
 
-    # Refit base models on full X for production use
+    scaler_prod = StandardScaler()
+    X_scaled_full = scaler_prod.fit_transform(X)
+
     rf.fit(X, y)
     lgbm.fit(X, y)
-    logreg.fit(X, y)
+    logreg.fit(X_scaled_full, y)
 
-    return meta_model
+    return meta_model, scaler_prod
 
 
 # ---------------------------------------------------------------------------
@@ -239,8 +248,13 @@ def save_ensemble(
     meta_model: LogisticRegression,
     feature_names: list[str],
     output_path: Path,
+    impute_values: dict[str, float] | None = None,
 ) -> None:
-    """Serialize the full fitted ensemble to a single joblib file."""
+    """Serialize the full fitted ensemble to a single joblib file.
+
+    *impute_values* maps feature name → median (from training fold) for chat
+    inference when free text leaves columns missing.
+    """
     bundle = {
         "rf": rf,
         "lgbm": lgbm,
@@ -248,6 +262,7 @@ def save_ensemble(
         "scaler": scaler,
         "meta_model": meta_model,
         "feature_names": feature_names,
+        "impute_values": impute_values or {},
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(bundle, output_path)
@@ -265,12 +280,14 @@ def save_predictions(
     lgbm,
     logreg,
     meta_model,
+    scaler: StandardScaler,
     output_path: Path,
 ) -> None:
     """Generate stacked ensemble predictions on the test set and save to CSV."""
     p_rf = rf.predict_proba(X_test)[:, 1]
     p_lgb = lgbm.predict_proba(X_test)[:, 1]
-    p_lr = logreg.predict_proba(X_test)[:, 1]
+    X_test_scaled = scaler.transform(X_test)
+    p_lr = logreg.predict_proba(X_test_scaled)[:, 1]
 
     meta_X = np.column_stack([p_lr, p_rf, p_lgb])
     y_proba = meta_model.predict_proba(meta_X)[:, 1]
@@ -319,12 +336,25 @@ def run(
 
     print(f"Train size: {len(X_train):,}  |  Test size: {len(X_test):,}")
 
-    rf, lgbm, logreg, scaler = train_base_models(X_train, y_train)
-    meta_model = train_meta_model(X, y, rf, lgbm, logreg)
+    rf, lgbm, logreg, _ = train_base_models(X_train, y_train)
+    meta_model, scaler = train_meta_model(X, y, rf, lgbm, logreg)
+
+    impute_values = {k: float(v) for k, v in X_train.median(numeric_only=True).items()}
 
     generate_artifact(rf, lgbm, logreg, meta_model, list(X.columns), artifact_path)
-    save_ensemble(rf, lgbm, logreg, scaler, meta_model, list(X.columns), ensemble_path)
-    save_predictions(X_test, y_test, rf, lgbm, logreg, meta_model, predictions_path)
+    save_ensemble(
+        rf,
+        lgbm,
+        logreg,
+        scaler,
+        meta_model,
+        list(X.columns),
+        ensemble_path,
+        impute_values=impute_values,
+    )
+    save_predictions(
+        X_test, y_test, rf, lgbm, logreg, meta_model, scaler, predictions_path
+    )
 
     return {
         "rf": rf,

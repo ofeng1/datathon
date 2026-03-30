@@ -4,7 +4,10 @@ import uuid
 from pathlib import Path
 from typing import Any, Dict
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, File, HTTPException, UploadFile
+
+load_dotenv()
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 
@@ -12,6 +15,7 @@ from api.schemas import (
     HealthResponse, ChatRequest, ChatResponse, ParseEdDocumentResponse,
 )
 from chatbot.engine import ChatEngine
+from chatbot.llm_client import llm_configured
 from data.ed_form_parser import parse_ed_form_text, pdf_to_text
 from rag.retrieve import rag_available
 
@@ -44,6 +48,7 @@ def health():
         status="ok" if _model_ok else "degraded",
         models_loaded=loaded,
         rag_index_loaded=rag_available(ART_DIR),
+        llm_configured=llm_configured(),
     )
 
 
@@ -57,8 +62,18 @@ def chat(req: ChatRequest):
         for k, v in req.merge_state.items():
             if v is not None:
                 engine.state[k] = v
-    reply = engine.respond(req.message)
-    return ChatResponse(session_id=sid, reply=reply)
+    try:
+        reply = engine.respond(req.message)
+        return ChatResponse(session_id=sid, reply=reply)
+    except Exception as e:
+        return ChatResponse(
+            session_id=sid,
+            reply=(
+                "Something went wrong while processing that message. "
+                "Try rephrasing, or check that models are loaded correctly."
+            ),
+            error=str(e),
+        )
 
 
 @app.post("/parse-ed-document", response_model=ParseEdDocumentResponse)
