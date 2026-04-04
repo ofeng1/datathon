@@ -25,7 +25,11 @@ _CONDITION_SYNONYMS = {
         "esrd", "end stage renal disease", "end-stage renal disease",
     ],
     "HTN": [
-        "htn", "hypertension", "high blood pressure",
+        "htn",
+        "hypertension",
+        "high blood pressure",
+        "hypertensive",
+        "hypertensive crisis",
     ],
     "DM": [
         "diabetes", "diabetic", "type 1 diabetes", "type 2 diabetes",
@@ -49,7 +53,7 @@ _CONDITION_SYNONYMS = {
         "hyperlipid", "high cholesterol", "hyperlipemia", "hyperlipidemia",
     ],
     "OBESITY": [
-        "obesity", "obese", "bmi > 30", "bmi > 30",
+        "obesity", "obese", "bmi > 30",
     ],
     "OSA": [
         "sleep apnea", "osa", "obstructive sleep apnea", "sleep apnea syndrome",
@@ -68,9 +72,6 @@ _CONDITION_SYNONYMS = {
     ],
     "INJURY": [
         "injury", "trauma", "fall", "accident", "laceration", "fracture",
-    ],
-    "HTN": [
-        "hypertension", "high blood pressure", "hypertensive", "hypertensive crisis",
     ],
     "DIABTYP0": [
         "diabetes", "diabetic", "type 1 diabetes", "type 2 diabetes",

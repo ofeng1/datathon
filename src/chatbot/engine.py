@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import json
 import os
-from typing import Any, Dict, List
+import threading
+from typing import Any, Dict, List, Optional, Tuple
 
 import joblib
 import numpy as np
@@ -31,6 +32,31 @@ from rag.retrieve import retrieve, rag_available
 ART_DIR = os.environ.get("ARTIFACT_DIR", "artifacts")
 _MODEL_KEY = "readmission"
 _ENSEMBLE_FILE = "models/ensemble.joblib"
+
+# One deserialized ensemble per process. Each new chat session used to call
+# joblib.load() again (multi‑second I/O + unpickle for RF + LightGBM).
+_shared_lock = threading.Lock()
+_shared_models: Optional[Dict[str, Any]] = None
+_shared_stats: Dict[str, Any] = {}
+
+
+def _shared_models_and_stats() -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    global _shared_models, _shared_stats
+    with _shared_lock:
+        if _shared_models is None:
+            path = os.path.join(ART_DIR, _ENSEMBLE_FILE)
+            bundle = joblib.load(path)
+            _shared_models = {_MODEL_KEY: bundle}
+            stats_path = os.path.join(ART_DIR, "stats.json")
+            if os.path.exists(stats_path):
+                try:
+                    with open(stats_path, encoding="utf-8") as f:
+                        _shared_stats = json.load(f)
+                except Exception:
+                    _shared_stats = {}
+            else:
+                _shared_stats = {}
+        return _shared_models, _shared_stats
 
 # Training-set medians (NHAMCS ED, merged + filter_nonnegative + row dropna).
 # Used when ensemble.joblib has no ``impute_values`` (legacy bundle).
@@ -145,24 +171,7 @@ class ChatEngine:
 
     def __init__(self) -> None:
         self.state: Dict[str, Any] = {}
-        self.models: Dict[str, Any] = {}
-        self._stats: Dict[str, Any] = {}
-        self._load_models()
-        self._load_stats()
-
-    def _load_models(self) -> None:
-        path = os.path.join(ART_DIR, _ENSEMBLE_FILE)
-        bundle = joblib.load(path)
-        self.models[_MODEL_KEY] = bundle
-
-    def _load_stats(self) -> None:
-        path = os.path.join(ART_DIR, "stats.json")
-        if os.path.exists(path):
-            try:
-                with open(path, encoding="utf-8") as f:
-                    self._stats = json.load(f)
-            except Exception:
-                self._stats = {}
+        self.models, self._stats = _shared_models_and_stats()
 
     def respond(self, message: str) -> str:
         intent = classify(message)
@@ -274,10 +283,10 @@ class ChatEngine:
             return "No models loaded. Run the training pipeline first."
 
         scores = self._run_predictions()
-        template = self._assess_template_reply(scores)
+        rag_hits = self._rag_recommendation_hits(scores)
 
         if llm_configured():
-            ctx = self._assess_llm_context(scores)
+            ctx = self._assess_llm_context(scores, rag_hits=rag_hits)
             synthesized = llm_complete(
                 assess_system_prompt(),
                 assess_user_prompt(ctx),
@@ -285,15 +294,17 @@ class ChatEngine:
             if synthesized:
                 return f"{synthesized}\n\n---\n\n{DISCLAIMER}"
 
-        return template
+        return self._assess_template_reply(scores, rag_hits=rag_hits)
 
-    def _assess_template_reply(self, scores: Dict[str, float]) -> str:
+    def _assess_template_reply(
+        self, scores: Dict[str, float], rag_hits: List[dict] | None = None
+    ) -> str:
         parts: List[str] = []
         parts.append(self._format_patient_summary())
         parts.append("")
         parts.append(self._format_risk_scores(scores))
 
-        rag_text = self._rag_recommendations(scores)
+        rag_text = self._rag_recommendations(scores, hits=rag_hits)
         if rag_text:
             parts.append("")
             parts.append(rag_text)
@@ -311,7 +322,9 @@ class ChatEngine:
 
         return "\n".join(parts)
 
-    def _assess_llm_context(self, scores: Dict[str, float]) -> Dict[str, Any]:
+    def _assess_llm_context(
+        self, scores: Dict[str, float], *, rag_hits: List[dict] | None = None
+    ) -> Dict[str, Any]:
         prob = float(scores.get("readmission", 0.0))
         pct = prob * 100.0
         if pct >= 30:
@@ -321,7 +334,7 @@ class ChatEngine:
         else:
             band, label = "low", "Low"
 
-        hits = self._rag_recommendation_hits(scores)
+        hits = rag_hits if rag_hits is not None else self._rag_recommendation_hits(scores)
         passages = [
             {
                 "source": h.get("source", "unknown"),
@@ -708,8 +721,10 @@ class ChatEngine:
         hits = retrieve(ART_DIR, query, top_k=3)
         return [h for h in hits if h["score"] > 0.03]
 
-    def _rag_recommendations(self, scores: Dict[str, float]) -> str:
-        relevant = self._rag_recommendation_hits(scores)
+    def _rag_recommendations(
+        self, scores: Dict[str, float], *, hits: List[dict] | None = None
+    ) -> str:
+        relevant = hits if hits is not None else self._rag_recommendation_hits(scores)
         if not relevant:
             return ""
 
